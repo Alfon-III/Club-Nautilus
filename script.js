@@ -64,19 +64,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tab Switching Logic
     const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
 
     if (tabBtns.length > 0) {
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
+                const group = btn.getAttribute('data-group');
+                const targetId = btn.getAttribute('data-target');
 
-                // Add active class to clicked button and corresponding content
+                // Select only elements within the same group
+                const groupBtns = document.querySelectorAll(`.tab-btn[data-group="${group}"]`);
+                const groupContents = document.querySelectorAll(`.tab-content[data-group="${group}"]`);
+
+                // Remove active class from group members
+                groupBtns.forEach(b => b.classList.remove('active'));
+                groupContents.forEach(c => c.classList.remove('active'));
+
+                // Activate clicked button and target
                 btn.classList.add('active');
-                const target = btn.getAttribute('data-target');
-                document.getElementById(target).classList.add('active');
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
             });
         });
     }

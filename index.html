@@ -92,12 +92,13 @@
 
 			<div class="tabs-container fade-in-up">
 				<div class="tabs">
-					<button class="tab-btn active" data-target="pool-comps">Instalaciones Acuáticas</button>
-					<button class="tab-btn" data-target="beach-comps">Aguas Abiertas</button>
+					<button class="tab-btn active" data-group="competitions" data-target="pool-comps">Instalaciones
+						Acuáticas</button>
+					<button class="tab-btn" data-group="competitions" data-target="beach-comps">Aguas Abiertas</button>
 				</div>
 			</div>
 
-			<div id="pool-comps" class="tab-content active">
+			<div id="pool-comps" class="tab-content active" data-group="competitions">
 				<div class="comp-category">
 					<div class="comp-grid">
 						<div class="comp-card fade-in-up">
@@ -158,7 +159,7 @@
 				</div>
 			</div>
 
-			<div id="beach-comps" class="tab-content">
+			<div id="beach-comps" class="tab-content" data-group="competitions">
 				<div class="comp-category">
 					<div class="comp-grid">
 						<div class="comp-card fade-in-up">
@@ -248,7 +249,22 @@
 				<img src="images/salida.png" alt="Salida Competición" style="width: 100%; height: auto;">
 			</div>
 
-			<div class="table-container fade-in-up">
+			<div class="tabs-container fade-in-up">
+				<div class="tabs">
+					<button class="tab-btn active" data-group="schedule"
+						data-target="schedule-absolutos">Absolutos</button>
+					<button class="tab-btn" data-group="schedule"
+						data-target="schedule-tecnificacion">Tecnificación</button>
+					<button class="tab-btn" data-group="schedule" data-target="schedule-masters">Masters</button>
+				</div>
+			</div>
+
+			<div id="schedule-absolutos" class="table-container fade-in-up tab-content active" data-group="schedule">
+				<div class="schedule-description fade-in-up">
+					<i class="fas fa-medal"></i>
+					<p>8h semanales para deportistas que quieran competir a nivel nacional. <strong>En
+							construcción</strong></p>
+				</div>
 				<table>
 					<thead>
 						<tr>
@@ -292,8 +308,78 @@
 					</tbody>
 				</table>
 			</div>
-			<p style="text-align: center; margin-bottom: 30px; color: var(--light-slate);" class="fade-in-up">👉 Además,
-				contamos con grupos de categoría máster y para edades inferiores a 15 años.</p>
+
+			<div id="schedule-tecnificacion" class="table-container fade-in-up tab-content" data-group="schedule">
+				<div class="schedule-description fade-in-up">
+					<i class="fas fa-dumbbell"></i>
+					<p>4h semanales para deportistas que quieran hacer algo de deporte y tengan que trabajar.</p>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>L</th>
+							<th>M</th>
+							<th>X</th>
+							<th>J</th>
+							<th>V</th>
+							<th>S</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>09-10 AM</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><i class="fas fa-check"></i></td>
+						</tr>
+						<tr>
+							<td>20-21 PM</td>
+							<td><i class="fas fa-check"></i></td>
+							<td></td>
+							<td><i class="fas fa-check"></i></td>
+							<td></td>
+							<td><i class="fas fa-check"></i></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="schedule-masters" class="table-container fade-in-up tab-content" data-group="schedule">
+				<div class="schedule-description fade-in-up">
+					<i class="fas fa-heartbeat"></i>
+					<p>Para mayores de 30 años que quieren seguir entrenando y compitiendo, pero que también quieren
+						cuidar su cuerpo.</p>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>L</th>
+							<th>M</th>
+							<th>X</th>
+							<th>J</th>
+							<th>V</th>
+							<th>S</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>19-20 PM</td>
+							<td></td>
+							<td><i class="fas fa-check"></i></td>
+							<td></td>
+							<td></td>
+							<td><i class="fas fa-check"></i></td>
+							<td><i class="fas fa-check"></i></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 			<div class="schedule-grid">
 				<div class="schedule-item fade-in-up">
@@ -347,7 +433,7 @@
 
 				<div class="sponsors">
 					<img src="images/cmdmadrid.png" alt="Ayuntamiento Madrid">
-					<img src="images/madriddeporte.png" alt="Madrid Deporte">
+					<!-- <img src="images/madriddeporte.png" alt="Madrid Deporte"> -->
 					<img src="images/distrito jmc.png" alt="Distrito">
 					<img src="images/fede.png" alt="Federación">
 					<img src="images/real.png" alt="Real Federación">

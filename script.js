@@ -97,40 +97,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (carouselSlide && carouselItems.length > 0) {
         let counter = 0;
-        const size = carouselItems[0].clientWidth;
+        let autoPlayInterval;
 
-        // Initial position
-        // carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+        // Function to get current slide width
+        function getSlideWidth() {
+            return carouselItems[0].clientWidth;
+        }
 
-        nextBtn.addEventListener('click', () => {
-            if (counter >= carouselItems.length - 1) {
-                counter = -1; // Loop back to start
-            }
-            counter++;
+        // Function to update carousel position
+        function updateCarousel() {
+            const size = getSlideWidth();
             carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
-        });
+        }
 
-        prevBtn.addEventListener('click', () => {
-            if (counter <= 0) {
-                counter = carouselItems.length; // Loop to end
-            }
-            counter--;
-            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
-        });
+        // Initialize carousel after a short delay to allow Instagram embeds to load
+        setTimeout(() => {
+            updateCarousel();
+        }, 500);
+
+        // Next button
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (counter >= carouselItems.length - 1) {
+                    counter = 0; // Loop back to start
+                } else {
+                    counter++;
+                }
+                updateCarousel();
+            });
+        }
+
+        // Previous button
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (counter <= 0) {
+                    counter = carouselItems.length - 1; // Loop to end
+                } else {
+                    counter--;
+                }
+                updateCarousel();
+            });
+        }
 
         // Auto-play carousel
-        setInterval(() => {
-            if (counter >= carouselItems.length - 1) {
-                counter = -1;
-            }
-            counter++;
-            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
-        }, 5000); // Change slide every 5 seconds
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                if (counter >= carouselItems.length - 1) {
+                    counter = 0;
+                } else {
+                    counter++;
+                }
+                updateCarousel();
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        // Start auto-play after initial delay
+        setTimeout(startAutoPlay, 1000);
+
+        // Pause auto-play on hover
+        if (carouselSlide) {
+            carouselSlide.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayInterval);
+            });
+
+            carouselSlide.addEventListener('mouseleave', () => {
+                startAutoPlay();
+            });
+        }
 
         // Handle resize
         window.addEventListener('resize', () => {
-            const newSize = carouselItems[0].clientWidth;
-            carouselSlide.style.transform = 'translateX(' + (-newSize * counter) + 'px)';
+            updateCarousel();
+        });
+
+        // Re-initialize when Instagram embeds finish loading
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                updateCarousel();
+            }, 1000);
         });
     }
 });

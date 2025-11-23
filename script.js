@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (carouselSlide && carouselItems.length > 0) {
         let counter = 0;
-        let autoPlayInterval;
 
         // Function to get current slide width
         function getSlideWidth() {
@@ -136,32 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     counter--;
                 }
                 updateCarousel();
-            });
-        }
-
-        // Auto-play carousel
-        function startAutoPlay() {
-            autoPlayInterval = setInterval(() => {
-                if (counter >= carouselItems.length - 1) {
-                    counter = 0;
-                } else {
-                    counter++;
-                }
-                updateCarousel();
-            }, 5000); // Change slide every 5 seconds
-        }
-
-        // Start auto-play after initial delay
-        setTimeout(startAutoPlay, 1000);
-
-        // Pause auto-play on hover
-        if (carouselSlide) {
-            carouselSlide.addEventListener('mouseenter', () => {
-                clearInterval(autoPlayInterval);
-            });
-
-            carouselSlide.addEventListener('mouseleave', () => {
-                startAutoPlay();
             });
         }
 

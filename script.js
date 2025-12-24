@@ -150,4 +150,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     }
+
+    // Skip Section Button Logic
+    const skipBtn = document.getElementById('skip-section-btn');
+    if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+            const sections = document.querySelectorAll('section');
+            const currentScroll = window.scrollY;
+            let nextSection = null;
+
+            for (const section of sections) {
+                // Add a small buffer (e.g. 100px) to consider "current" section vs "next"
+                if (section.offsetTop > currentScroll + 100) {
+                    nextSection = section;
+                    break;
+                }
+            }
+
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // If no next section (at the bottom), scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Hide button when at the top? Optional. Let's keep it generally visible but maybe hide at very top if needed.
+        // For now, let's just make sure it's visible. 
+        // We can add a scroll listener to toggle visibility if desired, but user didn't explicitly ask for it to hide.
+        // However, a nice touch is to hide it when at the bottom-most point if it's "next section" only.
+        // But looping to top is useful too.
+    }
 });

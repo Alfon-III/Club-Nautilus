@@ -319,4 +319,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Countdown Logic for Competitions
+    const scheduleRows = document.querySelectorAll('tr[data-date]');
+
+    if (scheduleRows.length > 0) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Normalize to midnight
+
+        scheduleRows.forEach(row => {
+            const dateStr = row.getAttribute('data-date');
+            const targetDate = new Date(dateStr);
+            const countdownCell = row.querySelector('.countdown-cell');
+
+            if (targetDate && countdownCell) {
+                // Check if date is valid
+                if (!isNaN(targetDate.getTime())) {
+                    const diffTime = targetDate - today;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                    if (diffDays < 0) {
+                        countdownCell.textContent = 'Finalizada';
+                        countdownCell.classList.add('finalized-event');
+                        row.style.opacity = '0.7'; // Dim past events
+                    } else if (diffDays === 0) {
+                        countdownCell.textContent = '¡Hoy!';
+                        countdownCell.style.color = '#00ff00'; // Green for today
+                    } else {
+                        countdownCell.textContent = `${diffDays} días`;
+                    }
+                } else {
+                    countdownCell.textContent = 'Fecha por confirmar';
+                }
+            }
+        });
+    }
 });

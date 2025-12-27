@@ -1219,3 +1219,21 @@ td i {
     background: rgba(10, 25, 47, 0.5);
     margin: 15px auto;
 }
+
+/* Competition Schedule Styles */
+.schedule-table th {
+    background: var(--primary-red);
+    /* DISTINCTIVE HEADER FOR COMPS */
+    color: var(--white);
+}
+
+.countdown-cell {
+    font-weight: bold;
+    color: var(--primary-red);
+}
+
+.finalized-event {
+    color: var(--light-slate);
+    font-style: italic;
+    opacity: 0.7;
+}

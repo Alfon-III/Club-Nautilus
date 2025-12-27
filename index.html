@@ -303,17 +303,117 @@
 	<section id="shop" class="section-padding shop">
 		<div class="container">
 			<h2 class="section-title fade-in-up">Equipación</h2>
-			<div class="shop-grid">
-				<div class="shop-item fade-in-up">
-					<img src="images/camiseta_premium_nau.png" alt="Camiseta Nautilus">
-					<div class="shop-content">
-						<h4>Camiseta + Gorro</h4>
-						<p>Pack oficial del material del club para competir</p>
-						<br>
-						<a href="mailto:cdenautilus@gmail.com?Subject=Interesado%20en%20la%20camiseta"
-							class="btn">Solicitar</a>
+
+			<!-- Collapsible Table -->
+			<div class="shop-table-container fade-in-up">
+				<button id="toggle-shop-table" class="btn">
+					<i class="fas fa-tshirt"></i> Ver Tabla de Equipación
+				</button>
+				<div id="shop-table-wrapper" class="collapsed">
+					<table class="shop-table">
+						<thead>
+							<tr>
+								<th>Equipación</th>
+								<th>Obligatoria</th>
+								<th>Uso</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Gorro Piscina</td>
+								<td><i class="fas fa-check"></i></td>
+								<td>Competiciones en piscina interior</td>
+							</tr>
+							<tr>
+								<td>Bañador Equipo</td>
+								<td><i class="fas fa-check"></i></td>
+								<td>Competiciones en piscina interior</td>
+							</tr>
+							<tr>
+								<td>Gorro Playa</td>
+								<td><i class="fas fa-check"></i></td>
+								<td>Competiciones aguas abiertas y banderas</td>
+							</tr>
+							<tr>
+								<td>Camiseta</td>
+								<td><i class="fas fa-check"></i></td>
+								<td>Competiciones y concentraciones</td>
+							</tr>
+							<tr>
+								<td>Sudadera</td>
+								<td><i class="fas fa-times"></i></td>
+								<td>Uso libre, recomendable para concentraciones</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<h3 class="shop-subtitle fade-in-up">Galería de fotos</h3>
+
+			<div class="shop-carousel-container fade-in-up">
+				<div class="shop-carousel-track">
+					<!-- Item 1: Camiseta -->
+					<div class="shop-carousel-card">
+						<img src="images/equipación/camiseta.jpeg" alt="Camiseta Oficial">
+						<div class="shop-content">
+							<h4>Camiseta Oficial</h4>
+							<p>Camiseta técnica con los colores del club.</p>
+						</div>
+					</div>
+					<!-- Item 2: Sudadera -->
+					<div class="shop-carousel-card">
+						<img src="images/equipación/sudadera.jpeg" alt="Sudadera Club">
+						<div class="shop-content">
+							<h4>Sudadera Club</h4>
+							<p>Sudadera cómoda y cálida para entrenamientos y viajes.</p>
+						</div>
+					</div>
+					<!-- Item 3: Bañador Masculino -->
+					<div class="shop-carousel-card">
+						<img src="images/equipación/bañador_masc.jpeg" alt="Bañador Masculino">
+						<div class="shop-content">
+							<h4>Bañador Masculino</h4>
+							<p>Bañador de competición resistente al cloro.</p>
+						</div>
+					</div>
+					<!-- Item 4: Bañador Femenino -->
+					<div class="shop-carousel-card">
+						<img src="images/equipación/mañador_fem.jpeg" alt="Bañador Femenino">
+						<div class="shop-content">
+							<h4>Bañador Femenino</h4>
+							<p>Bañador de competición con ajuste perfecto.</p>
+						</div>
+					</div>
+					<!-- Item 5: Gorro Playa -->
+					<div class="shop-carousel-card">
+						<img src="images/equipación/gorro_playa.jpeg" alt="Gorro Playa">
+						<div class="shop-content">
+							<h4>Gorro Playa</h4>
+							<p>Gorro especial para aguas abiertas y playa.</p>
+						</div>
 					</div>
 				</div>
+
+				<!-- Navigation Buttons -->
+				<button class="shop-nav-btn prev">
+					<i class="fas fa-chevron-left"></i>
+				</button>
+				<button class="shop-nav-btn next">
+					<i class="fas fa-chevron-right"></i>
+				</button>
+			</div>
+
+			<!-- Shop Contact Info -->
+			<div class="shop-contact fade-in-up">
+				<p>Para solicitar la equipación, envía un correo a la dirección:</p>
+				<div class="contact-info-display light-bg">
+					<span id="shop-contact-email">cdenautilus@gmail.com</span>
+					<button id="shop-copy-email-btn" class="copy-btn" aria-label="Copiar email">
+						<i class="far fa-copy"></i>
+					</button>
+				</div>
+				<p>Nos pondremos en contacto con usted lo antes posible.</p>
 			</div>
 		</div>
 	</section>

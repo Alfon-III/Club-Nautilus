@@ -208,4 +208,115 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // Shop Carousel Logic
+    const shopTrack = document.querySelector('.shop-carousel-track');
+    const shopCards = document.querySelectorAll('.shop-carousel-card');
+    const shopPrevBtn = document.querySelector('.shop-nav-btn.prev');
+    const shopNextBtn = document.querySelector('.shop-nav-btn.next');
+
+    if (shopTrack && shopCards.length > 0) {
+        let currentIndex = 0;
+
+        function updateShopCarousel() {
+            const cardWidth = shopCards[0].offsetWidth;
+            // Add gap to width calculation
+            const gap = 20; // Matches CSS gap
+            const moveAmount = (cardWidth + gap) * currentIndex;
+            shopTrack.style.transform = `translateX(-${moveAmount}px)`;
+        }
+
+        if (shopNextBtn) {
+            shopNextBtn.addEventListener('click', () => {
+                // Calculate how many items are visible
+                const containerWidth = document.querySelector('.shop-carousel-container').offsetWidth;
+                const cardWidth = shopCards[0].offsetWidth + 20; // width + gap
+                const visibleItems = Math.floor(containerWidth / cardWidth);
+
+                // Prevent scrolling past the last item
+                // Max index such that the last item is visible
+                /* 
+                   Logic:
+                   If we have 5 items, and 3 are visible.
+                   Indices: 0, 1, 2, 3, 4
+                   We want to show items 2, 3, 4 at the end.
+                   So track should be translated by width of 0 and 1.
+                   Max Index should be Total - Visible.
+                   If Total(5) - Visible(3) = 2.
+                   TranslateX(- (card + gap) * 2) shows cards 2, 3, 4.
+               */
+
+                const maxIndex = Math.max(0, shopCards.length - visibleItems);
+
+                // But user might want simple item-by-item loop
+                // Let's implement simple infinite loop logic for better UX
+                if (currentIndex >= maxIndex) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                updateShopCarousel();
+            });
+        }
+
+        if (shopPrevBtn) {
+            shopPrevBtn.addEventListener('click', () => {
+                const containerWidth = document.querySelector('.shop-carousel-container').offsetWidth;
+                const cardWidth = shopCards[0].offsetWidth + 20;
+                const visibleItems = Math.floor(containerWidth / cardWidth);
+                const maxIndex = Math.max(0, shopCards.length - visibleItems);
+
+                if (currentIndex <= 0) {
+                    currentIndex = maxIndex;
+                } else {
+                    currentIndex--;
+                }
+                updateShopCarousel();
+            });
+        }
+
+        // Resize handler
+        window.addEventListener('resize', updateShopCarousel);
+    }
+
+    // Shop Table Toggle Logic
+    const toggleTableBtn = document.getElementById('toggle-shop-table');
+    const tableWrapper = document.getElementById('shop-table-wrapper');
+
+    if (toggleTableBtn && tableWrapper) {
+        toggleTableBtn.addEventListener('click', () => {
+            tableWrapper.classList.toggle('collapsed');
+
+            // Update button text
+            if (tableWrapper.classList.contains('collapsed')) {
+                toggleTableBtn.innerHTML = '<i class="fas fa-tshirt"></i> Ver Tabla de Equipación';
+            } else {
+                toggleTableBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Ocultar Tabla';
+            }
+        });
+    }
+
+    // Shop Email Copy Functionality
+    const shopCopyEmailBtn = document.getElementById('shop-copy-email-btn');
+    const shopContactEmail = document.getElementById('shop-contact-email');
+
+    if (shopCopyEmailBtn && shopContactEmail) {
+        shopCopyEmailBtn.addEventListener('click', () => {
+            const emailText = shopContactEmail.innerText;
+
+            navigator.clipboard.writeText(emailText).then(() => {
+                const icon = shopCopyEmailBtn.querySelector('i');
+                const originalClass = icon.className;
+
+                icon.className = 'fas fa-check';
+                icon.style.color = 'var(--primary-red)';
+
+                setTimeout(() => {
+                    icon.className = originalClass;
+                    icon.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    }
 });

@@ -1085,7 +1085,6 @@ td i {
     width: 100%;
     height: 300px;
     object-fit: contain;
-    background-color: var(--white);
     /* Changed to contain for full visibility */
 }
 

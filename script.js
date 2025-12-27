@@ -181,4 +181,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // However, a nice touch is to hide it when at the bottom-most point if it's "next section" only.
         // But looping to top is useful too.
     }
+    // Contact Email Copy Functionality
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const contactEmail = document.getElementById('contact-email');
+
+    if (copyEmailBtn && contactEmail) {
+        copyEmailBtn.addEventListener('click', () => {
+            const emailText = contactEmail.innerText;
+
+            navigator.clipboard.writeText(emailText).then(() => {
+                // Success feedback
+                const icon = copyEmailBtn.querySelector('i');
+                const originalClass = icon.className;
+
+                // Change icon to checkmark
+                icon.className = 'fas fa-check';
+                icon.style.color = 'var(--primary-red)';
+
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    icon.className = originalClass;
+                    icon.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    }
 });

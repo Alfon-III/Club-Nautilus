@@ -1008,3 +1008,48 @@ td i {
         transform: translateY(-5px);
     }
 }
+
+/* Contact Email Display */
+.contact-info-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    background: #f0f2f5;
+    padding: 10px 20px;
+    border-radius: 50px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #e1e4e8;
+}
+
+#contact-email {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    color: var(--primary-navy);
+    font-size: 1.1rem;
+}
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--light-slate);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    color: var(--primary-red);
+    transform: scale(1.1);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}

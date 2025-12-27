@@ -1084,8 +1084,9 @@ td i {
 .shop-carousel-card img {
     width: 100%;
     height: 300px;
-    object-fit: cover;
-    /* Changed to cover for better filling */
+    object-fit: contain;
+    background-color: var(--white);
+    /* Changed to contain for full visibility */
 }
 
 .shop-content {

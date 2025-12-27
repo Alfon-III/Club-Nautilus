@@ -276,6 +276,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Resize handler
         window.addEventListener('resize', updateShopCarousel);
+
+        // Touch Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        shopTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        shopTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance to be considered a swipe
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swiped Left -> Next
+                if (shopNextBtn) shopNextBtn.click();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swiped Right -> Prev
+                if (shopPrevBtn) shopPrevBtn.click();
+            }
+        }
     }
 
     // Shop Table Toggle Logic

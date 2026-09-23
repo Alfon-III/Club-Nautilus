@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.current-year').forEach(element => {
+        element.textContent = new Date().getFullYear();
+    });
+
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');

@@ -3,18 +3,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
+    if (hamburger && navLinks) {
+        const toggleMenu = () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        hamburger.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleMenu();
+            }
         });
     }
 
     // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+        if (hamburger && navLinks) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+        const moreMenu = document.querySelector('.nav-more');
+        if (moreMenu) {
+            moreMenu.classList.remove('open');
+            moreMenu.querySelector('.nav-more-toggle')?.setAttribute('aria-expanded', 'false');
+        }
     }));
+
+    const moreMenu = document.querySelector('.nav-more');
+    const moreToggle = document.querySelector('.nav-more-toggle');
+    if (moreMenu && moreToggle) {
+        moreToggle.addEventListener('click', () => {
+            const isOpen = moreMenu.classList.toggle('open');
+            moreToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+    }
 
     // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -33,13 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
+            header.classList.add('scrolled');
             header.style.background = 'rgba(10, 25, 47, 0.95)';
             header.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
         } else {
+            header.classList.remove('scrolled');
             header.style.background = 'rgba(10, 25, 47, 0.85)';
             header.style.boxShadow = 'none';
         }
     });
+
+    // Keep the current section visible in the desktop navigation.
+    const navAnchors = [...document.querySelectorAll('.nav-links a')];
+    const sectionAnchors = navAnchors.filter(anchor => anchor.getAttribute('href').startsWith('#'));
+    const navigableSections = sectionAnchors
+        .map(anchor => document.querySelector(anchor.getAttribute('href')))
+        .filter(Boolean);
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                    sectionAnchors.forEach(anchor => {
+                    anchor.classList.toggle('active', anchor.getAttribute('href') === `#${entry.target.id}`);
+                });
+            }
+        });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+    navigableSections.forEach(section => sectionObserver.observe(section));
 
     // Intersection Observer for Fade-in Animations
     const observerOptions = {
@@ -76,11 +123,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const groupContents = document.querySelectorAll(`.tab-content[data-group="${group}"]`);
 
                 // Remove active class from group members
-                groupBtns.forEach(b => b.classList.remove('active'));
+                groupBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
                 groupContents.forEach(c => c.classList.remove('active'));
 
                 // Activate clicked button and target
                 btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
                 const targetContent = document.getElementById(targetId);
                 if (targetContent) {
                     targetContent.classList.add('active');
@@ -310,9 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleTableBtn && tableWrapper) {
         toggleTableBtn.addEventListener('click', () => {
             tableWrapper.classList.toggle('collapsed');
+            const isCollapsed = tableWrapper.classList.contains('collapsed');
+            toggleTableBtn.setAttribute('aria-expanded', String(!isCollapsed));
 
             // Update button text
-            if (tableWrapper.classList.contains('collapsed')) {
+            if (isCollapsed) {
                 toggleTableBtn.innerHTML = '<i class="fas fa-tshirt"></i> Ver Tabla de Equipación';
             } else {
                 toggleTableBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Ocultar Tabla';

@@ -31,7 +31,7 @@
 	<!-- Header -->
 	<header>
 		<div class="container">
-			<nav>
+			<nav aria-label="Navegación principal">
 				<a href="#" class="logo">
 					<img src="images/nautilicon.png" alt="Logo Nautilus">
 					CLUB NAUTILUS
@@ -40,16 +40,16 @@
 					<li><a href="#hero">Inicio</a></li>
 					<li><a href="#about">Nosotros</a></li>
 					<li><a href="#instagram">Instagram</a></li>
-					<li><a href="#competitions">Competiciones</a></li>
+					<li><a href="secciones/competiciones.html">Competiciones</a></li>
 					<li><a href="#shop">Equipación</a></li>
 					<li><a href="#location">Ubicación</a></li>
 					<li><a href="#contact">Contacto</a></li>
 				</ul>
-				<div class="hamburger">
+				<button class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false">
 					<span class="bar"></span>
 					<span class="bar"></span>
 					<span class="bar"></span>
-				</div>
+				</button>
 			</nav>
 		</div>
 	</header>
@@ -95,6 +95,24 @@
 
 				<img src="images/nautilus-blanco.png" alt="Logo Club Nautilus Grande">
 
+			</div>
+		</div>
+	</section>
+
+	<!-- Club Sections -->
+	<section id="explore" class="section-padding explore-sections">
+		<div class="container">
+			<div class="section-intro fade-in-up">
+				<span class="section-kicker"><i class="fas fa-compass"></i> Explora Nautilus</span>
+				<h2 class="section-title">Todo el club, a un salto</h2>
+				<p>Consulta el calendario de competiciones y la actividad actual del equipo.</p>
+			</div>
+			<div class="section-links-grid">
+				<a class="section-link-card fade-in-up" href="secciones/competiciones.html"><span class="section-link-icon"><i class="fas fa-flag-checkered"></i></span><span><strong>Competiciones</strong><small>Disciplinas y pruebas</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card fade-in-up" href="#location"><span class="section-link-icon"><i class="fas fa-clock"></i></span><span><strong>Horarios</strong><small>Entrenamientos por grupo</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card fade-in-up" href="#shop"><span class="section-link-icon"><i class="fas fa-shirt"></i></span><span><strong>Material</strong><small>Equipación del club</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card fade-in-up" href="#location"><span class="section-link-icon"><i class="fas fa-location-dot"></i></span><span><strong>Ubicación</strong><small>Piscina y puntos de entrenamiento</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card fade-in-up" href="#contact"><span class="section-link-icon"><i class="fas fa-envelope"></i></span><span><strong>Contacto</strong><small>Habla con el club</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
 			</div>
 		</div>
 	</section>
@@ -155,10 +173,10 @@
 				</div>
 
 				<!-- Navigation Buttons -->
-				<button class="carousel-btn prev-btn">
+				<button class="carousel-btn prev-btn" type="button" aria-label="Publicación anterior">
 					<i class="fas fa-chevron-left"></i>
 				</button>
-				<button class="carousel-btn next-btn">
+				<button class="carousel-btn next-btn" type="button" aria-label="Publicación siguiente">
 					<i class="fas fa-chevron-right"></i>
 				</button>
 			</div>
@@ -167,238 +185,9 @@
 			<script async src="//www.instagram.com/embed.js"></script>
 		</div>
 		<div style="text-align: center; margin-top: 40px;">
-			<a href="https://www.instagram.com/nautilus_sos/" target="_blank" class="btn btn-primary">
+			<a href="https://www.instagram.com/nautilus_sos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
 				<i class="fab fa-instagram"></i> Síguenos en Instagram
 			</a>
-		</div>
-	</section>
-
-	<!-- Competitions Section -->
-	<section id="competitions" class="section-padding competitions">
-		<div class="container">
-			<h2 class="section-title fade-in-up">Pruebas de Competición</h2>
-
-			<div class="tabs-container fade-in-up">
-				<div class="tabs">
-					<button class="tab-btn active" data-group="competitions" data-target="pool-comps">Instalaciones
-						Acuáticas</button>
-					<button class="tab-btn" data-group="competitions" data-target="beach-comps">Aguas
-						Abiertas</button>
-				</div>
-			</div>
-
-			<div id="pool-comps" class="tab-content active" data-group="competitions">
-				<div class="table-container fade-in-up">
-					<h3>🏊🏻‍♂️ Temporada de Piscina (2025 - 2026)</h3>
-					<table class="schedule-table">
-						<thead>
-							<tr>
-								<th>Fechas</th>
-								<th>Evento</th>
-								<th>Lugar</th>
-								<th>Asistencia</th>
-								<th>Cuenta Atrás</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr data-date="2025-10-25">
-								<td>25 - 26 Oct 2025</td>
-								<td>Toma de Tiempos Distancias Cortas (Juv, Jun, Abs)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2025-11-15">
-								<td>15 - 16 Nov 2025</td>
-								<td>VI Cto. de España Distancias Cortas</td>
-								<td>Fuente de la Niña, Guadalajara</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2025-11-15">
-								<td>15 o 16 Nov 2025</td>
-								<td>1ª Sesión Liga Española (Menores y Máster)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2025-11-29">
-								<td>29 - 30 Nov 2025</td>
-								<td>1ª Sesión Liga Española (Mayores)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2025-12-13">
-								<td>13 - 14 Dic 2025</td>
-								<td>IV Spanish Cup (Cto. España Individual)</td>
-								<td>Rosario Dueñas, Ourense</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-01-17">
-								<td>17 o 18 Ene 2026</td>
-								<td>2ª Sesión Liga Española (Menores y Máster)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-01-24">
-								<td>24 - 25 Ene 2026</td>
-								<td>2ª Sesión Liga Española (Mayores)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-02-07">
-								<td>7 - 8 Feb 2026</td>
-								<td>XXXVI Trofeo Comunidad de Madrid / 12º Open de Alcorcón</td>
-								<td>Prado Santo Domingo, Alcorcón</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-02-28">
-								<td>28 Feb o 1 Mar 26</td>
-								<td>1ª Sesión - 2ª Jornada Liga (Menores y Máster)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-07">
-								<td>7 y 8 Mar 2026</td>
-								<td>XXIII TROFEO NACIONAL DE SALVAMENTO “CIUDAD DE VALLADOLID”</td>
-								<td>Piscina Municipal Ribera de Castilla</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-15">
-								<td>15 Mar 2026</td>
-								<td>VI Abierto de Madrid de Salvamento</td>
-								<td>M86, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-21">
-								<td>21 - 22 Mar 2026</td>
-								<td>1ª Sesión - 2ª Jornada Liga (Mayores)</td>
-								<td>CDM Palomeras, Madrid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-21">
-								<td>21 - 22 Mar 2026</td>
-								<td>XIII Campeonato de España Máster de Piscina</td>
-								<td>Parquesol, Valladolid</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-27">
-								<td>27 - 29 Mar 2026</td>
-								<td>Concentración deportiva en Playa</td>
-								<td>A determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-03-28">
-								<td>28 - 29 Mar 2026</td>
-								<td>VII Campeonato de España Infantil y Cadete de Primavera</td>
-								<td>Bétera, Valencia</td>
-								<td><i class="fas fa-times" style="color: var(--light-slate); opacity: 0.5;"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-04-17">
-								<td>17 - 19 Abr 2026</td>
-								<td>XIV Spanish Open - XL Campeonato de España de piscina</td>
-								<td>Piscina Olímpica, Castellón</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div id="beach-comps" class="tab-content" data-group="competitions">
-				<div class="table-container fade-in-up">
-					<h3>🌊 Temporada de Banderas y Aguas Abiertas (2026)</h3>
-					<table class="schedule-table">
-						<thead>
-							<tr>
-								<th>Fechas</th>
-								<th>Evento</th>
-								<th>Lugar</th>
-								<th>Asistencia</th>
-								<th>Cuenta Atrás</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr data-date="2026-05-31">
-								<td>31 Mayo 2026</td>
-								<td>XXXVI Trofeo CM - 1ª Jornada Banderas</td>
-								<td>C.D.P de Hierro</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-06-27">
-								<td>27 - 28 Junio 2026</td>
-								<td>XIII Cto. de España Máster de Playa</td>
-								<td>Playa de Loredo, Cantabria</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-06-01">
-								<td>Jun - Jul - Ago</td>
-								<td>XXXVI Trofeo Comunidad Madrid - Jornadas 1 y 2 AA</td>
-								<td>Guadalix de la Sierra</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-06-01">
-								<td>Jun - Jul - Ago</td>
-								<td>XXXVI Trofeo CM - 2ª/3ª jornada y FINAL Banderas</td>
-								<td>C.D.P de Hierro</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-07-18">
-								<td>18 - 19 Jul 2026</td>
-								<td>I Campeonato España Estival Playa (Juv, Jun, Abs)</td>
-								<td>Playa de Ris, Noja</td>
-								<td><i class="fas fa-times" style="color: var(--light-slate); opacity: 0.5;"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-07-24">
-								<td>24 - 26 Jul 2026</td>
-								<td>XXXVIII Cto. España Infantil y Cadete Verano</td>
-								<td>Playa la Salvé de Laredo, Cantabria</td>
-								<td><i class="fas fa-times" style="color: var(--light-slate); opacity: 0.5;"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-09-01">
-								<td>1 - 3 Sep 2026</td>
-								<td>XXXVIII Cto. España Juvenil y Junior Verano</td>
-								<td>Playa de Razo, Galicia</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-09-04">
-								<td>4 - 6 Sep 2026</td>
-								<td>Cto. de España Absoluto de Verano</td>
-								<td>Playa de Razo, Galicia</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2026-09-25">
-								<td>25 - 27 Sep 2026</td>
-								<td>XXXIV Cto. España CC.AA (Abs y Cadete)</td>
-								<td>A determinar</td>
-								<td><i class="fas fa-times" style="color: var(--light-slate); opacity: 0.5;"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</section>
 
@@ -409,7 +198,7 @@
 
 			<!-- Collapsible Table -->
 			<div class="shop-table-container fade-in-up">
-				<button id="toggle-shop-table" class="btn">
+				<button id="toggle-shop-table" type="button" class="btn" aria-expanded="false" aria-controls="shop-table-wrapper">
 					<i class="fas fa-tshirt"></i> Ver Tabla de Equipación
 				</button>
 				<div id="shop-table-wrapper" class="collapsed">
@@ -506,10 +295,10 @@
 				</div>
 
 				<!-- Navigation Buttons -->
-				<button class="shop-nav-btn prev">
+				<button class="shop-nav-btn prev" type="button" aria-label="Equipación anterior">
 					<i class="fas fa-chevron-left"></i>
 				</button>
-				<button class="shop-nav-btn next">
+				<button class="shop-nav-btn next" type="button" aria-label="Equipación siguiente">
 					<i class="fas fa-chevron-right"></i>
 				</button>
 			</div>
@@ -519,7 +308,7 @@
 				<p>Para solicitar la equipación, envía un correo a la dirección:</p>
 				<div class="contact-info-display light-bg">
 					<span id="shop-contact-email">cdenautilus@gmail.com</span>
-					<button id="shop-copy-email-btn" class="copy-btn" aria-label="Copiar email">
+					<button id="shop-copy-email-btn" type="button" class="copy-btn" aria-label="Copiar email">
 						<i class="far fa-copy"></i>
 					</button>
 				</div>
@@ -535,9 +324,9 @@
 
 			<div class="tabs-container fade-in-up">
 				<div class="tabs">
-					<button class="tab-btn active" data-group="schedule" data-target="schedule-absolutos">Ápex</button>
-					<button class="tab-btn" data-group="schedule" data-target="schedule-tecnificacion">Tecnificación</button>
-					<button class="tab-btn" data-group="schedule" data-target="schedule-masters">Másters</button>
+					<button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="schedule-absolutos" data-group="schedule" data-target="schedule-absolutos">Ápex</button>
+					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="schedule-tecnificacion" data-group="schedule" data-target="schedule-tecnificacion">Tecnificación</button>
+					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="schedule-masters" data-group="schedule" data-target="schedule-masters">Másters</button>
 				</div>
 			</div>
 
@@ -549,46 +338,8 @@
 				</div>
 
 				<table>
-					<thead>
-						<tr>
-							<th>Hora</th>
-							<th>L</th>
-							<th>M</th>
-							<th>X</th>
-							<th>J</th>
-							<th>V</th>
-							<th>S</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>09:00-10:00</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-						</tr>
-						<tr>
-							<td>19:00-20:00</td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>20:00-21:00</td>
-							<td><i class="fas fa-check"></i></td>
-							<td><i class="fas fa-check"></i></td>
-							<td><i class="fas fa-check"></i></td>
-							<td><i class="fas fa-check"></i></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-						</tr>
-					</tbody>
+					<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th></tr></thead>
+					<tbody><tr><td>19:00-21:00</td><td>20:00-21:00</td><td>19:00-21:00</td><td>20:00-21:00</td><td>19:30-21:00</td><td>09:00-10:00</td></tr></tbody>
 				</table>
 			</div>
 
@@ -600,46 +351,8 @@
 				</div>
 
 				<table>
-					<thead>
-						<tr>
-							<th>Hora</th>
-							<th>L</th>
-							<th>M</th>
-							<th>X</th>
-							<th>J</th>
-							<th>V</th>
-							<th>S</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>09:00-10:00</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-						</tr>
-						<tr>
-							<td>19:30-20:00</td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>20:00-21:00</td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-						</tr>
-					</tbody>
+					<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th></tr></thead>
+					<tbody><tr><td>19:30-21:00</td><td>—</td><td>19:30-21:00</td><td>—</td><td>19:30-21:00</td><td>09:00-10:00</td></tr></tbody>
 				</table>
 			</div>
 
@@ -653,7 +366,6 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Hora</th>
 							<th>L</th>
 							<th>M</th>
 							<th>X</th>
@@ -664,20 +376,16 @@
 					</thead>
 					<tbody>
 						<tr>
+							<td>—</td>
 							<td>19:00-20:00</td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
-							<td><i class="fas fa-check"></i></td>
-							<td><i class="fas fa-check"></i></td>
-							<td></td>
+							<td>—</td>
+							<td>19:00-20:00</td>
+							<td>19:00-20:00</td>
+							<td>—</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-
-		</div>
-	</section>
 
 			<div class="schedule-grid">
 				<div class="schedule-item fade-in-up">
@@ -690,7 +398,7 @@
 			<div class="map-container fade-in-up">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.9405782815275!2d-3.738677684369474!3d40.43231466261498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228188c1d8917%3A0x243d095b52a81126!2sMunicipal%20Polideportivo%20Jose%20Maria%20Cagigal!5e0!3m2!1sen!2ses!4v1670090582843!5m2!1sen!2ses"
-					width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+					width="100%" height="100%" title="Ubicación del Centro Deportivo Jose Maria Cagigal" style="border:0;" allowfullscreen="" loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade">
 				</iframe>
 			</div>
@@ -706,7 +414,7 @@
 					<p>No dudes en escribirnos, estaremos encantados de atenderte.</p>
 					<div class="contact-info-display">
 						<span id="contact-email">cdenautilus@gmail.com</span>
-						<button id="copy-email-btn" class="copy-btn" aria-label="Copiar email">
+						<button id="copy-email-btn" type="button" class="copy-btn" aria-label="Copiar email">
 							<i class="far fa-copy"></i>
 						</button>
 					</div>
@@ -714,7 +422,7 @@
 						<a href="mailto:cdenautilus@gmail.com" class="btn btn-primary">
 							<i class="fas fa-envelope"></i> Enviar Correo
 						</a>
-						<a href="https://www.instagram.com/nautilus_sos/" target="_blank" class="btn btn-outline">
+						<a href="https://www.instagram.com/nautilus_sos/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
 							<i class="fab fa-instagram"></i> Instagram
 						</a>
 					</div>
@@ -738,7 +446,7 @@
 	</section>
 
 	<!-- Skip Section Button -->
-	<button id="skip-section-btn" aria-label="Siguiente Sección">
+	<button id="skip-section-btn" type="button" aria-label="Siguiente sección">
 		<i class="fas fa-chevron-down"></i>
 	</button>
 

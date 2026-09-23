@@ -13,10 +13,17 @@
 	<section id="competitions" class="section-padding competitions">
 		<div class="container">
 			<h2 class="section-title fade-in-up">Calendario de competiciones</h2>
+			<div class="tabs-container competitions-tabs fade-in-up">
+				<div class="tabs" role="tablist" aria-label="Tipo de competición">
+					<button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="pool-comps" data-group="competitions" data-target="pool-comps"><i class="fas fa-person-swimming"></i> Piscina</button>
+					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="beach-comps" data-group="competitions" data-target="beach-comps"><i class="fas fa-umbrella-beach"></i> Playa y aguas abiertas</button>
+				</div>
+			</div>
 
 			<div id="pool-comps" class="tab-content active" data-group="competitions">
-				<div class="table-container fade-in-up">
+				<div class="table-container schedule-table-container fade-in-up">
 					<h3>🏊🏻‍♂️ Temporada de Piscina (2026 - 2027)</h3>
+					<div class="schedule-table-scroll">
 					<table class="schedule-table">
 						<thead>
 							<tr>
@@ -72,12 +79,14 @@
 							</tr>
 						</tbody>
 					</table>
+					</div>
 				</div>
 			</div>
 
-			<div id="beach-comps" class="tab-content" data-group="competitions" style="display:none;">
-				<div class="table-container fade-in-up">
+			<div id="beach-comps" class="tab-content" data-group="competitions">
+				<div class="table-container schedule-table-container fade-in-up">
 					<h3>🌊 Temporada de playa y aguas abiertas (2027)</h3>
+					<div class="schedule-table-scroll">
 					<table class="schedule-table">
 						<thead>
 							<tr>
@@ -112,6 +121,7 @@
 							</tr>
 						</tbody>
 					</table>
+					</div>
 				</div>
 			</div>
 		</div>

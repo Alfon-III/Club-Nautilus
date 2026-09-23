@@ -281,6 +281,33 @@
     margin-top: 45px;
 }
 
+.schedule-table-container {
+    overflow: hidden;
+}
+
+.schedule-table-container h3 {
+    margin-bottom: 22px;
+}
+
+.schedule-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table {
+    min-width: 760px;
+}
+
+.competitions-tabs {
+    margin: 0 auto 42px;
+}
+
+.competitions-tabs .tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
 @media (max-width: 768px) {
     .page-hero {
         min-height: 500px;
@@ -311,5 +338,104 @@
 
     .timeline-item::before {
         left: -34px;
+    }
+
+    .schedule-table-container {
+        padding: 22px 16px;
+    }
+
+    .schedule-table-container h3 {
+        font-size: 1.05rem;
+        line-height: 1.35;
+    }
+
+    .competitions-tabs {
+        margin-bottom: 28px;
+    }
+
+    .competitions-tabs .tabs {
+        display: flex;
+        flex-direction: column;
+        width: min(100%, 360px);
+        margin: 0 auto;
+        border-radius: 14px;
+    }
+
+    .competitions-tabs .tab-btn {
+        justify-content: center;
+        min-height: 48px;
+        padding: 12px 14px;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    .schedule-table-scroll {
+        overflow: visible;
+    }
+
+    .schedule-table {
+        display: block;
+        min-width: 0 !important;
+    }
+
+    .schedule-table thead {
+        display: none;
+    }
+
+    .schedule-table tbody,
+    .schedule-table tr {
+        display: block;
+    }
+
+    .schedule-table tr {
+        margin-bottom: 14px;
+        padding: 12px 14px;
+        border: 1px solid var(--section-line);
+        border-radius: 8px;
+        background: rgba(10, 25, 47, 0.68);
+    }
+
+    .schedule-table tr:last-child {
+        margin-bottom: 0;
+    }
+
+    .schedule-table td {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 8px 0;
+        text-align: left;
+        overflow-wrap: anywhere;
+        font-size: 0.88rem;
+    }
+
+    .schedule-table td::before {
+        color: var(--lightest-slate);
+        font-family: 'Exo 2', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .schedule-table td:nth-child(1)::before {
+        content: 'Fecha';
+    }
+
+    .schedule-table td:nth-child(2)::before {
+        content: 'Evento';
+    }
+
+    .schedule-table td:nth-child(3)::before {
+        content: 'Lugar';
+    }
+
+    .schedule-table td:nth-child(4)::before {
+        content: 'Asistencia';
+    }
+
+    .schedule-table td:nth-child(5)::before {
+        content: 'Cuenta atrás';
     }
 }

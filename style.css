@@ -884,6 +884,16 @@ body > header nav {
     color: var(--white);
 }
 
+.schedule-description-copy {
+    display: grid;
+    gap: 4px;
+}
+
+.schedule-hours {
+    color: var(--white);
+    font-weight: 600;
+}
+
 .table-container {
     overflow-x: auto;
     scrollbar-width: thin;

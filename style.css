@@ -910,12 +910,51 @@ tbody tr:hover {
 
 #location table {
     table-layout: fixed;
-    min-width: 680px;
+    min-width: 600px;
 }
 
 #location th {
     padding-top: 0;
     color: var(--lightest-slate);
+    font-size: 0.875rem;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-red);
+}
+
+#location th + th,
+#location td + td {
+    border-left: 1px solid var(--section-line);
+}
+
+#location td {
+    padding-block: 18px;
+    text-align: center;
+}
+
+#location th,
+#location td {
+    padding-inline: 8px;
+}
+
+#location .session-time {
+    color: var(--white);
+}
+
+#location .time-line {
+    display: block;
+    color: var(--white);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+#location .time-line + .time-line {
+    color: var(--lightest-slate);
+    font-weight: 500;
+}
+
+#location .no-session {
+    color: var(--light-slate);
 }
 
 #location td {

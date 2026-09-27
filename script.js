@@ -402,38 +402,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Countdown Logic for Competitions
-    const scheduleRows = document.querySelectorAll('tr[data-date]');
+    // Competition calendar: upcoming dates first, then completed and undated events.
+    const competitionTable = document.querySelector('#competition-list');
 
-    if (scheduleRows.length > 0) {
+    if (competitionTable) {
+        const tableBody = competitionTable.tBodies[0];
+        const filterButtons = [...document.querySelectorAll('.competition-filter')];
+        const count = document.querySelector('#competition-count');
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Normalize to midnight
+        const todayDay = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+        const toUtcDay = value => {
+            const [year, month, day] = value.split('-').map(Number);
+            return Date.UTC(year, month - 1, day);
+        };
 
-        scheduleRows.forEach(row => {
-            const dateStr = row.getAttribute('data-date');
-            const targetDate = new Date(dateStr);
+        const competitions = [...tableBody.rows].map((row, index) => {
+            const start = row.dataset.date ? toUtcDay(row.dataset.date) : null;
+            const end = row.dataset.end ? toUtcDay(row.dataset.end) : start;
             const countdownCell = row.querySelector('.countdown-cell');
+            let group = 2;
 
-            if (targetDate && countdownCell) {
-                // Check if date is valid
-                if (!isNaN(targetDate.getTime())) {
-                    const diffTime = targetDate - today;
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                    if (diffDays < 0) {
-                        countdownCell.textContent = 'Finalizada';
-                        countdownCell.classList.add('finalized-event');
-                        row.style.opacity = '0.7'; // Dim past events
-                    } else if (diffDays === 0) {
-                        countdownCell.textContent = '¡Hoy!';
-                        countdownCell.style.color = '#00ff00'; // Green for today
-                    } else {
-                        countdownCell.textContent = `${diffDays} días`;
-                    }
-                } else {
-                    countdownCell.textContent = 'Fecha por confirmar';
-                }
+            if (start === null) {
+                countdownCell.textContent = 'Día por concretar';
+            } else if (todayDay > end) {
+                group = 1;
+                countdownCell.textContent = 'Finalizada';
+                countdownCell.classList.add('finalized-event');
+            } else {
+                group = 0;
+                countdownCell.textContent = todayDay >= start
+                    ? 'En curso'
+                    : `${Math.round((start - todayDay) / 86400000)} días`;
             }
+
+            return { row, index, start, end, group };
+        });
+
+        competitions.sort((a, b) => {
+            if (a.group !== b.group) return a.group - b.group;
+            if (a.group === 0) return a.start - b.start;
+            if (a.group === 1) return b.end - a.end;
+            return a.index - b.index;
+        });
+        competitions.forEach(({ row }) => tableBody.appendChild(row));
+
+        const applyFilter = selected => {
+            let visibleCount = 0;
+            competitions.forEach(({ row }) => {
+                const matches = selected === 'all' || row.dataset.categories.split(' ').includes(selected);
+                row.hidden = !matches;
+                if (matches) visibleCount += 1;
+            });
+            filterButtons.forEach(button => {
+                button.setAttribute('aria-pressed', String(button.dataset.filter === selected));
+            });
+            count.textContent = `${visibleCount} ${visibleCount === 1 ? 'competición' : 'competiciones'}`;
+        };
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => applyFilter(button.dataset.filter));
         });
     }
 });

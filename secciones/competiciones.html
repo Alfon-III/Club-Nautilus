@@ -12,116 +12,51 @@
 <section class="page-hero"><div class="container"><div class="page-hero-content fade-in-up"><span class="page-kicker"><i class="fas fa-flag-checkered"></i> El reto empieza aquí</span><h1>Competiciones</h1><p>Las disciplinas y escenarios donde el Club Nautilus pone a prueba su preparación.</p></div></div></section>
 	<section id="competitions" class="section-padding competitions">
 		<div class="container">
-			<h2 class="section-title fade-in-up">Calendario de competiciones</h2>
-			<div class="tabs-container competitions-tabs fade-in-up">
-				<div class="tabs" role="tablist" aria-label="Tipo de competición">
-					<button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="pool-comps" data-group="competitions" data-target="pool-comps"><i class="fas fa-person-swimming"></i> Piscina</button>
-					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="beach-comps" data-group="competitions" data-target="beach-comps"><i class="fas fa-umbrella-beach"></i> Playa y aguas abiertas</button>
-				</div>
+			<h2 class="section-title fade-in-up">Calendario 2026–2027</h2>
+			<p class="competition-intro">Las próximas competiciones aparecen primero. Las citas sin día concretado figuran al final.</p>
+			<div class="competition-filters" role="group" aria-label="Filtrar competiciones">
+				<button type="button" class="competition-filter" data-filter="all" aria-pressed="true">Todas</button>
+				<button type="button" class="competition-filter" data-filter="piscina" aria-pressed="false">Piscina</button>
+				<button type="button" class="competition-filter" data-filter="playa" aria-pressed="false">Playa</button>
+				<button type="button" class="competition-filter" data-filter="banderas" aria-pressed="false">Banderas</button>
+				<button type="button" class="competition-filter" data-filter="liga" aria-pressed="false">Liga</button>
 			</div>
-
-			<div id="pool-comps" class="tab-content active" data-group="competitions">
-				<div class="table-container schedule-table-container fade-in-up">
-					<h3>🏊🏻‍♂️ Temporada de Piscina (2026 - 2027)</h3>
-					<div class="schedule-table-scroll">
-					<table class="schedule-table">
+			<p id="competition-count" class="competition-count" role="status" aria-live="polite" aria-atomic="true">26 competiciones</p>
+			<div class="table-container schedule-table-container fade-in-up">
+				<div class="schedule-table-scroll">
+					<table id="competition-list" class="schedule-table">
 						<thead>
-							<tr>
-								<th>Fechas</th>
-								<th>Evento</th>
-								<th>Lugar</th>
-								<th>Asistencia</th>
-								<th>Cuenta Atrás</th>
-							</tr>
+							<tr><th scope="col">Fecha</th><th scope="col">Competición</th><th scope="col">Lugar</th><th scope="col">Cuenta atrás</th></tr>
 						</thead>
 						<tbody>
-							<tr data-date="2026-12-19">
-								<td>19–20 dic. 2026</td>
-								<td>VII Campeonato de España y Open de Distancias Cortas — Juvenil, Júnior y Absoluto</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-02-21">
-								<td>21 feb. 2027</td>
-								<td>Campeonato de Castilla y León Máster / Open Máster</td>
-								<td>Valladolid — Piscina 50 m Río Esgueva</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-03-06">
-								<td>6–7 mar. 2027</td>
-								<td>Trofeo Ciudad de Valladolid</td>
-								<td>Valladolid — Río Esgueva</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-03-20">
-								<td>20–21 mar. 2027</td>
-								<td>XIV Campeonato de España y Open Máster de Piscina</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-04-23">
-								<td>23–25 abr. 2027</td>
-								<td>XLI Campeonato de España y Open de Primavera — Juvenil, Júnior y Absoluto</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-07-16">
-								<td>16–18 jul. 2027</td>
-								<td>I Campeonato de España y Open de Verano — Cadete, Juvenil, Júnior y Absoluto</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
+						<tr data-categories="piscina liga" data-date="2026-11-07" data-end="2026-11-08"><td>7–8 noviembre 2026</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">1.ª sesión - 1.ª jornada Fase Territorial XXVII Liga Española de Clubes Mayores</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga" data-date="2026-11-14" data-end="2026-11-15"><td>14–15 noviembre 2026</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">1.ª sesión - 1.ª jornada Fase Territorial XXVII Liga Española de Clubes Menores y Máster</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2026-11-28" data-end="2026-11-29"><td>28–29 noviembre 2026</td><td><span class="competition-type">Piscina</span><span class="competition-name">Toma de tiempos Juvenil, Júnior y Absoluto - Distancias Cortas</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2026-12-19" data-end="2026-12-20"><td>19–20 diciembre 2026</td><td><span class="competition-type">Piscina</span><span class="competition-name">VII Campeonato de España de Distancias Cortas Juvenil, Júnior y Absoluto</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga" data-date="2027-01-23" data-end="2027-01-24"><td>23–24 enero 2027</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">2.ª sesión - 1.ª jornada Fase Territorial XXVII Liga Española de Clubes Menores y Máster</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga" data-date="2027-01-30" data-end="2027-01-31"><td>30–31 enero 2027</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">2.ª sesión - 1.ª jornada Fase Territorial XXVII Liga Española de Clubes Mayores</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2027-02-20" data-end="2027-02-21"><td>20–21 febrero 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - Jornada Piscina / 13.º Open Ciudad de Alcorcón</span></td><td>Piscina Prado Santo Domingo, Alcorcón</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga" data-date="2027-02-28"><td>28 febrero 2027</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">1.ª sesión - 2.ª jornada Fase Territorial XXVII Liga Española de Clubes Menores y Máster</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga" data-date="2027-03-06" data-end="2027-03-07"><td>6–7 marzo 2027</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">1.ª sesión - 2.ª jornada Fase Territorial XXVII Liga Española de Clubes Mayores</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2027-03-20" data-end="2027-03-21"><td>20–21 marzo 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">XIV Campeonato de España Máster de Piscina</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2027-04-10" data-end="2027-04-11"><td>10–11 abril 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">I Campeonato de España y Open de Primavera Cadete, Juvenil, Júnior y Absoluto</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2027-04-17" data-end="2027-04-18"><td>17–18 abril 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">VIII Campeonato de España Infantil y Cadete de Primavera</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina" data-date="2027-04-23" data-end="2027-04-25"><td>23–25 abril 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">XV Spanish Open - XLI Campeonato de España Juvenil, Júnior y Absoluto de Piscina</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-05-15"><td>15 mayo 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - 1.ª jornada Aguas Abiertas</span></td><td>Puerto Náutico de Guadalix de la Sierra</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa banderas" data-date="2027-05-16"><td>16 mayo 2027</td><td><span class="competition-type">Playa · Banderas</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - 1.ª jornada Banderas</span></td><td>C.D.P. de Hierro</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-05-29"><td>29 mayo 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - 2.ª jornada Aguas Abiertas</span></td><td>Puerto Náutico de Guadalix de la Sierra</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa banderas" data-date="2027-05-30"><td>30 mayo 2027</td><td><span class="competition-type">Playa · Banderas</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - 2.ª jornada Banderas</span></td><td>C.D.P. de Hierro</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa banderas" data-date="2027-06-12"><td>12 junio 2027</td><td><span class="competition-type">Playa · Banderas</span><span class="competition-name">XXXVII Trofeo Comunidad de Madrid Sal y Sos - Final Banderas</span></td><td>C.D.P. de Hierro</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-06-19" data-end="2027-06-20"><td>19–20 junio 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XIV Campeonato de España Máster de Playa</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-06-26" data-end="2027-06-27"><td>26–27 junio 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">II Campeonato de España Estival de Playa Juvenil, Júnior y Absoluto</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-07-02" data-end="2027-07-04"><td>2–4 julio 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XXXIX Campeonato de España Infantil y Cadete de Verano</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-07-16" data-end="2027-07-18"><td>16–18 julio 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">I Campeonato de España y Open de Verano Cadete, Juvenil, Júnior y Absoluto</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-08-24" data-end="2027-08-26"><td>24–26 agosto 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XXXIX Campeonato de España Juvenil y Júnior de Verano</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="playa" data-date="2027-08-27" data-end="2027-08-29"><td>27–29 agosto 2027</td><td><span class="competition-type">Playa</span><span class="competition-name">XXXIX Campeonato de España Absoluto de Verano</span></td><td>Por determinar</td><td class="countdown-cell">Calculando...</td></tr>
+						<tr data-categories="piscina liga"><td>Marzo 2027</td><td><span class="competition-type">Piscina · Liga</span><span class="competition-name">V Trofeo Salvamento y Socorrismo Oriol Imperial / 2.ª sesión - 2.ª jornada Fase Territorial</span></td><td>Piscina Cubierta Santa María de Benquerencia, Toledo</td><td class="countdown-cell">Día por concretar</td></tr>
+						<tr data-categories="piscina"><td>Marzo 2027</td><td><span class="competition-type">Piscina</span><span class="competition-name">VII Abierto de Madrid de Salvamento y Socorrismo 2027</span></td><td>Mundial M86</td><td class="countdown-cell">Día por concretar</td></tr>
 						</tbody>
 					</table>
-					</div>
-				</div>
-			</div>
-
-			<div id="beach-comps" class="tab-content" data-group="competitions">
-				<div class="table-container schedule-table-container fade-in-up">
-					<h3>🌊 Temporada de playa y aguas abiertas (2027)</h3>
-					<div class="schedule-table-scroll">
-					<table class="schedule-table">
-						<thead>
-							<tr>
-								<th>Fechas</th>
-								<th>Evento</th>
-								<th>Lugar</th>
-								<th>Asistencia</th>
-								<th>Cuenta Atrás</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr data-date="2027-05-08">
-								<td>8–9 may. 2027</td>
-								<td>I Campeonato de España y Open de Primavera — Cadete, Juvenil, Júnior y Absoluto</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-06-19">
-								<td>19–20 jun. 2027</td>
-								<td>XIV Campeonato de España y Open Máster de Playa</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-							<tr data-date="2027-06-25">
-								<td>25–27 jun. 2027</td>
-								<td>II Campeonato de España y Open Estival de Playa — Youth y Absoluto</td>
-								<td>Por determinar</td>
-								<td><i class="fas fa-check" style="color: var(--primary-red);"></i></td>
-								<td class="countdown-cell">Calculando...</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
 				</div>
 			</div>
 		</div>

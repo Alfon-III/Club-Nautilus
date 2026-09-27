@@ -295,32 +295,39 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCopyButton('copy-email-btn', 'contact-email');
     setupCopyButton('shop-copy-email-btn', 'shop-contact-email');
 
-    // Competition calendar: upcoming dates first, then completed and undated events.
+    // Competition calendar: upcoming events first, then completed and undated events.
     const competitionTable = document.querySelector('#competition-list');
 
     if (competitionTable) {
         const tableBody = competitionTable.tBodies[0];
-        const filterButtons = [...document.querySelectorAll('.competition-filter')];
-        const count = document.querySelector('#competition-count');
         const today = new Date();
         const todayDay = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+        const thisMonth = Date.UTC(today.getFullYear(), today.getMonth(), 1);
         const toUtcDay = value => {
             const [year, month, day] = value.split('-').map(Number);
             return Date.UTC(year, month - 1, day);
+        };
+        const toUtcMonth = value => {
+            const [year, month] = value.split('-').map(Number);
+            return Date.UTC(year, month - 1, 1);
         };
 
         const competitions = [...tableBody.rows].map((row, index) => {
             const start = row.dataset.date ? toUtcDay(row.dataset.date) : null;
             const end = row.dataset.end ? toUtcDay(row.dataset.end) : start;
+            const month = row.dataset.month ? toUtcMonth(row.dataset.month) : null;
             const countdownCell = row.querySelector('.countdown-cell');
             let group = 2;
 
             if (start === null) {
-                countdownCell.textContent = 'Día por concretar';
+                if (month !== null && month >= thisMonth) group = 0;
             } else if (todayDay > end) {
                 group = 1;
                 countdownCell.textContent = 'Finalizada';
                 countdownCell.classList.add('finalized-event');
+            } else if (row.dataset.provisional === 'true') {
+                group = 0;
+                countdownCell.textContent = 'Fecha provisional';
             } else {
                 group = 0;
                 countdownCell.textContent = todayDay >= start
@@ -328,32 +335,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     : `${Math.round((start - todayDay) / 86400000)} días`;
             }
 
-            return { row, index, start, end, group };
+            return { row, index, start, end, month, group };
         });
 
         competitions.sort((a, b) => {
             if (a.group !== b.group) return a.group - b.group;
-            if (a.group === 0) return a.start - b.start;
+            if (a.group === 0) return (a.start ?? a.month) - (b.start ?? b.month);
             if (a.group === 1) return b.end - a.end;
             return a.index - b.index;
         });
         competitions.forEach(({ row }) => tableBody.appendChild(row));
-
-        const applyFilter = selected => {
-            let visibleCount = 0;
-            competitions.forEach(({ row }) => {
-                const matches = selected === 'all' || row.dataset.categories.split(' ').includes(selected);
-                row.hidden = !matches;
-                if (matches) visibleCount += 1;
-            });
-            filterButtons.forEach(button => {
-                button.setAttribute('aria-pressed', String(button.dataset.filter === selected));
-            });
-            count.textContent = `${visibleCount} ${visibleCount === 1 ? 'competición' : 'competiciones'}`;
-        };
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => applyFilter(button.dataset.filter));
-        });
     }
 });

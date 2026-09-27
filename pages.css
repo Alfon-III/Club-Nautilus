@@ -192,45 +192,6 @@
     margin: -16px 0 32px;
 }
 
-.competition-filters {
-    display: flex;
-    gap: 32px;
-    overflow-x: auto;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--section-line);
-}
-
-.competition-filter {
-    flex: 0 0 auto;
-    min-height: 48px;
-    padding: 12px 0;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    border-radius: 0;
-    background: transparent;
-    color: var(--lightest-slate);
-    font: inherit;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 150ms ease, border-color 150ms ease;
-}
-
-.competition-filter:hover,
-.competition-filter[aria-pressed="true"] {
-    color: var(--white);
-    border-bottom-color: var(--primary-red);
-}
-
-.competition-filter:focus-visible {
-    outline: 2px solid var(--white);
-    outline-offset: -4px;
-}
-
-.competition-count {
-    margin: 0 0 24px;
-    font-size: 0.9375rem;
-}
-
 .schedule-table-container {
     padding: 0;
 }
@@ -269,10 +230,6 @@
     width: 25%;
 }
 
-.schedule-table [hidden] {
-    display: none !important;
-}
-
 .competition-type {
     display: block;
     margin-bottom: 4px;
@@ -285,6 +242,15 @@
     color: var(--white);
     font-weight: 600;
     line-height: 1.5;
+}
+
+.competition-details {
+    display: block;
+    margin-top: 8px;
+    color: var(--lightest-slate);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.55;
 }
 
 @media (max-width: 980px) {
@@ -355,10 +321,6 @@
 
     .media-card img {
         aspect-ratio: 3 / 2;
-    }
-
-    .competition-filters {
-        gap: 24px;
     }
 
     .schedule-table-scroll {

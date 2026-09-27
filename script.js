@@ -151,17 +151,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const postLink = carousel.querySelector('.carousel-post-link');
         const links = items.map(item => item.querySelector('[data-instgrm-permalink]')?.dataset.instgrmPermalink
             || item.querySelector('iframe')?.src?.replace(/\/embed\/?(?:\?.*)?$/, '/'));
-        const leading = Math.min(2, items.length - 1);
-        const restingOffset = 10 - leading * 80;
+        const desktopLayout = window.matchMedia('(min-width: 900px)');
+        let leading = desktopLayout.matches ? 1 : Math.min(2, items.length - 1);
+        let cardWidth = desktopLayout.matches ? 100 / 3 : 80;
+        let restingOffset = desktopLayout.matches ? 0 : 10 - leading * cardWidth;
         let active = 0;
         let target = 0;
         let moving = false;
+
+        const syncLayout = () => {
+            leading = desktopLayout.matches ? 1 : Math.min(2, items.length - 1);
+            cardWidth = desktopLayout.matches ? 100 / 3 : 80;
+            restingOffset = desktopLayout.matches ? 0 : 10 - leading * cardWidth;
+            track.style.transform = `translateX(${restingOffset}%)`;
+        };
 
         track.id ||= 'instagram-posts';
         track.removeAttribute('tabindex');
         track.removeAttribute('role');
         track.removeAttribute('aria-label');
-        track.style.transform = `translateX(${restingOffset}%)`;
+        syncLayout();
         viewport.tabIndex = 0;
         viewport.setAttribute('role', 'region');
         viewport.setAttribute('aria-roledescription', 'carrusel');
@@ -186,7 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const updateHeight = () => {
-            viewport.style.height = `${Math.ceil(items[active].getBoundingClientRect().height)}px`;
+            const visibleItems = desktopLayout.matches
+                ? items.filter(item => Number(item.style.order) < 3)
+                : [items[active]];
+            const height = Math.max(...visibleItems.map(item => item.getBoundingClientRect().height));
+            viewport.style.height = `${Math.ceil(height)}px`;
         };
 
         const render = () => {
@@ -228,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const animation = track.animate([
-                { transform: `translateX(${restingOffset + direction * 80}%)` },
+                { transform: `translateX(${restingOffset + direction * cardWidth}%)` },
                 { transform: `translateX(${restingOffset}%)` }
             ], { duration: 260, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
             animation.finished.then(finish, finish);
@@ -286,6 +299,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const observer = new ResizeObserver(updateHeight);
             items.forEach(item => observer.observe(item));
         }
+        desktopLayout.addEventListener('change', () => {
+            syncLayout();
+            render();
+        });
         window.addEventListener('resize', updateHeight, { passive: true });
         render();
     };

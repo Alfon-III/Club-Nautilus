@@ -3,404 +3,297 @@ document.addEventListener('DOMContentLoaded', () => {
         element.textContent = new Date().getFullYear();
     });
 
-    // Mobile Navigation
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const scrollBehavior = () => reducedMotion.matches ? 'instant' : 'smooth';
+
+    // The mobile menu uses the same navigation links as the desktop header.
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const mobileNavigation = window.matchMedia('(max-width: 980px)');
 
     if (hamburger && navLinks) {
-        const toggleMenu = () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+        navLinks.id ||= 'primary-navigation';
+        hamburger.setAttribute('aria-controls', navLinks.id);
+
+        const setMenuOpen = open => {
+            const isOpen = open && mobileNavigation.matches;
+            hamburger.classList.toggle('active', isOpen);
+            navLinks.classList.toggle('active', isOpen);
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+            navLinks.inert = mobileNavigation.matches && !isOpen;
         };
 
-        hamburger.addEventListener('click', toggleMenu);
-        hamburger.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                toggleMenu();
+        hamburger.addEventListener('click', () => {
+            setMenuOpen(hamburger.getAttribute('aria-expanded') !== 'true');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMenuOpen(false));
+        });
+
+        document.addEventListener('click', event => {
+            if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
+                setMenuOpen(false);
             }
         });
-    }
 
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
-        if (hamburger && navLinks) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-        const moreMenu = document.querySelector('.nav-more');
-        if (moreMenu) {
-            moreMenu.classList.remove('open');
-            moreMenu.querySelector('.nav-more-toggle')?.setAttribute('aria-expanded', 'false');
-        }
-    }));
-
-    const moreMenu = document.querySelector('.nav-more');
-    const moreToggle = document.querySelector('.nav-more-toggle');
-    if (moreMenu && moreToggle) {
-        moreToggle.addEventListener('click', () => {
-            const isOpen = moreMenu.classList.toggle('open');
-            moreToggle.setAttribute('aria-expanded', String(isOpen));
-        });
-    }
-
-    // Smooth Scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+                setMenuOpen(false);
+                hamburger.focus();
             }
         });
-    });
 
-    // Navbar Scroll Effect
+        mobileNavigation.addEventListener('change', () => setMenuOpen(false));
+        setMenuOpen(false);
+    }
+
+    // Anchors use the browser's native scrolling and the CSS scroll margin.
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-            header.style.background = 'rgba(10, 25, 47, 0.95)';
-            header.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
-        } else {
-            header.classList.remove('scrolled');
-            header.style.background = 'rgba(10, 25, 47, 0.85)';
-            header.style.boxShadow = 'none';
-        }
+    if (header) {
+        const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 16);
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        updateHeader();
+    }
+
+    const sectionLinks = [...document.querySelectorAll('.nav-links a')]
+        .filter(link => /^#.+/.test(link.getAttribute('href') || ''))
+        .map(link => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+        .filter(({ section }) => section);
+
+    if ('IntersectionObserver' in window && sectionLinks.length) {
+        const sectionObserver = new IntersectionObserver(entries => {
+            const current = entries.find(entry => entry.isIntersecting);
+            if (!current) return;
+
+            sectionLinks.forEach(({ link, section }) => {
+                const active = section === current.target;
+                link.classList.toggle('active', active);
+                if (active) link.setAttribute('aria-current', 'location');
+                else link.removeAttribute('aria-current');
+            });
+        }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+        sectionLinks.forEach(({ section }) => sectionObserver.observe(section));
+    }
+
+    // Schedule tabs keep one control in the keyboard's tab order.
+    const tabGroups = new Map();
+    document.querySelectorAll('.tab-btn').forEach(button => {
+        const panel = document.getElementById(button.dataset.target);
+        if (!panel) return;
+        const group = button.dataset.group || 'default';
+        if (!tabGroups.has(group)) tabGroups.set(group, []);
+        tabGroups.get(group).push({ button, panel });
     });
 
-    // Keep the current section visible in the desktop navigation.
-    const navAnchors = [...document.querySelectorAll('.nav-links a')];
-    const sectionAnchors = navAnchors.filter(anchor => anchor.getAttribute('href').startsWith('#'));
-    const navigableSections = sectionAnchors
-        .map(anchor => document.querySelector(anchor.getAttribute('href')))
-        .filter(Boolean);
+    tabGroups.forEach(tabs => {
+        const tabList = tabs[0].button.closest('.tabs');
+        tabList?.setAttribute('role', 'tablist');
+        if (tabList && !tabList.hasAttribute('aria-label')) {
+            tabList.setAttribute('aria-label', 'Grupos de entrenamiento');
+        }
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                    sectionAnchors.forEach(anchor => {
-                    anchor.classList.toggle('active', anchor.getAttribute('href') === `#${entry.target.id}`);
-                });
-            }
+        tabs.forEach(({ button, panel }) => {
+            button.id = `tab-${panel.id}`;
+            button.setAttribute('role', 'tab');
+            button.setAttribute('aria-controls', panel.id);
+            panel.setAttribute('role', 'tabpanel');
+            panel.setAttribute('aria-labelledby', button.id);
+            panel.tabIndex = 0;
         });
-    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
-    navigableSections.forEach(section => sectionObserver.observe(section));
+        const activateTab = (selected, focus = false) => {
+            tabs.forEach(({ button, panel }, index) => {
+                const active = index === selected;
+                button.classList.toggle('active', active);
+                button.setAttribute('aria-selected', String(active));
+                button.tabIndex = active ? 0 : -1;
+                panel.classList.toggle('active', active);
+                panel.hidden = !active;
+            });
+            if (focus) tabs[selected].button.focus();
+        };
 
-    // Intersection Observer for Fade-in Animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        tabs.forEach(({ button }, index) => {
+            button.addEventListener('click', () => activateTab(index));
+            button.addEventListener('keydown', event => {
+                let selected;
+                if (event.key === 'ArrowRight') selected = (index + 1) % tabs.length;
+                else if (event.key === 'ArrowLeft') selected = (index - 1 + tabs.length) % tabs.length;
+                else if (event.key === 'Home') selected = 0;
+                else if (event.key === 'End') selected = tabs.length - 1;
+                else return;
+
+                event.preventDefault();
+                activateTab(selected, true);
+            });
+        });
+
+        const initial = tabs.findIndex(({ button }) => button.classList.contains('active'));
+        activateTab(Math.max(0, initial));
+    });
+
+    // Native scrolling supports touch, trackpads and the visible arrow controls.
+    const setupCarousel = ({ trackSelector, itemSelector, previousSelector, nextSelector, id, label }) => {
+        const track = document.querySelector(trackSelector);
+        if (!track) return;
+        const items = [...track.querySelectorAll(itemSelector)];
+        if (!items.length) return;
+        const previous = document.querySelector(previousSelector);
+        const next = document.querySelector(nextSelector);
+
+        track.id ||= id;
+        track.tabIndex = 0;
+        track.setAttribute('role', 'region');
+        track.setAttribute('aria-label', label);
+        [previous, next].forEach(button => button?.setAttribute('aria-controls', track.id));
+
+        const maximumScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+        const updateControls = () => {
+            if (previous) previous.disabled = track.scrollLeft <= 2;
+            if (next) next.disabled = track.scrollLeft >= maximumScroll() - 2;
+        };
+
+        const move = direction => {
+            const limit = maximumScroll();
+            const current = track.scrollLeft;
+            const trackLeft = track.getBoundingClientRect().left + track.clientLeft;
+            const positions = items.map(item => Math.max(0, Math.min(limit,
+                item.getBoundingClientRect().left - trackLeft + current)));
+            positions.push(limit);
+
+            const destination = direction > 0
+                ? positions.find(position => position > current + 2) ?? limit
+                : positions.reverse().find(position => position < current - 2) ?? 0;
+
+            track.scrollTo({ left: destination, behavior: scrollBehavior() });
+        };
+
+        previous?.addEventListener('click', () => move(-1));
+        next?.addEventListener('click', () => move(1));
+        track.addEventListener('scroll', updateControls, { passive: true });
+        window.addEventListener('resize', updateControls, { passive: true });
+        window.addEventListener('load', updateControls, { once: true });
+
+        if ('ResizeObserver' in window) {
+            const resizeObserver = new ResizeObserver(updateControls);
+            resizeObserver.observe(track);
+            items.forEach(item => resizeObserver.observe(item));
+        }
+        updateControls();
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible'); // Use class for animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    const fadeElements = document.querySelectorAll('.fade-in-up');
-    fadeElements.forEach(el => {
-        observer.observe(el);
+    setupCarousel({
+        trackSelector: '.carousel-slide',
+        itemSelector: '.carousel-item',
+        previousSelector: '.prev-btn',
+        nextSelector: '.next-btn',
+        id: 'instagram-posts',
+        label: 'Instagram'
     });
 
-    // Tab Switching Logic
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    setupCarousel({
+        trackSelector: '.shop-carousel-track',
+        itemSelector: '.shop-carousel-card',
+        previousSelector: '.shop-nav-btn.prev',
+        nextSelector: '.shop-nav-btn.next',
+        id: 'equipment-gallery',
+        label: 'Galería de equipación'
+    });
 
-    if (tabBtns.length > 0) {
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const group = btn.getAttribute('data-group');
-                const targetId = btn.getAttribute('data-target');
-
-                // Select only elements within the same group
-                const groupBtns = document.querySelectorAll(`.tab-btn[data-group="${group}"]`);
-                const groupContents = document.querySelectorAll(`.tab-content[data-group="${group}"]`);
-
-                // Remove active class from group members
-                groupBtns.forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-selected', 'false');
-                });
-                groupContents.forEach(c => c.classList.remove('active'));
-
-                // Activate clicked button and target
-                btn.classList.add('active');
-                btn.setAttribute('aria-selected', 'true');
-                const targetContent = document.getElementById(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-            });
-        });
-    }
-
-    // Instagram Carousel Logic
-    const carouselSlide = document.querySelector('.carousel-slide');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-
-    if (carouselSlide && carouselItems.length > 0) {
-        let counter = 0;
-
-        // Function to get current slide width
-        function getSlideWidth() {
-            return carouselItems[0].clientWidth;
-        }
-
-        // Function to update carousel position
-        function updateCarousel() {
-            const size = getSlideWidth();
-            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
-        }
-
-        // Initialize carousel after a short delay to allow Instagram embeds to load
-        setTimeout(() => {
-            updateCarousel();
-        }, 500);
-
-        // Next button
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                if (counter >= carouselItems.length - 1) {
-                    counter = 0; // Loop back to start
-                } else {
-                    counter++;
-                }
-                updateCarousel();
-            });
-        }
-
-        // Previous button
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                if (counter <= 0) {
-                    counter = carouselItems.length - 1; // Loop to end
-                } else {
-                    counter--;
-                }
-                updateCarousel();
-            });
-        }
-
-        // Handle resize
-        window.addEventListener('resize', () => {
-            updateCarousel();
-        });
-
-        // Re-initialize when Instagram embeds finish loading
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                updateCarousel();
-            }, 1000);
-        });
-    }
-
-    // Skip Section Button Logic
-    const skipBtn = document.getElementById('skip-section-btn');
-    if (skipBtn) {
-        skipBtn.addEventListener('click', () => {
-            const sections = document.querySelectorAll('section');
-            const currentScroll = window.scrollY;
-            let nextSection = null;
-
-            for (const section of sections) {
-                // Add a small buffer (e.g. 100px) to consider "current" section vs "next"
-                if (section.offsetTop > currentScroll + 100) {
-                    nextSection = section;
-                    break;
-                }
-            }
-
-            if (nextSection) {
-                nextSection.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                // If no next section (at the bottom), scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-
-        // Hide button when at the top? Optional. Let's keep it generally visible but maybe hide at very top if needed.
-        // For now, let's just make sure it's visible. 
-        // We can add a scroll listener to toggle visibility if desired, but user didn't explicitly ask for it to hide.
-        // However, a nice touch is to hide it when at the bottom-most point if it's "next section" only.
-        // But looping to top is useful too.
-    }
-    // Contact Email Copy Functionality
-    const copyEmailBtn = document.getElementById('copy-email-btn');
-    const contactEmail = document.getElementById('contact-email');
-
-    if (copyEmailBtn && contactEmail) {
-        copyEmailBtn.addEventListener('click', () => {
-            const emailText = contactEmail.innerText;
-
-            navigator.clipboard.writeText(emailText).then(() => {
-                // Success feedback
-                const icon = copyEmailBtn.querySelector('i');
-                const originalClass = icon.className;
-
-                // Change icon to checkmark
-                icon.className = 'fas fa-check';
-                icon.style.color = 'var(--primary-red)';
-
-                // Revert after 2 seconds
-                setTimeout(() => {
-                    icon.className = originalClass;
-                    icon.style.color = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        });
-    }
-    // Shop Carousel Logic
-    const shopTrack = document.querySelector('.shop-carousel-track');
-    const shopCards = document.querySelectorAll('.shop-carousel-card');
-    const shopPrevBtn = document.querySelector('.shop-nav-btn.prev');
-    const shopNextBtn = document.querySelector('.shop-nav-btn.next');
-
-    if (shopTrack && shopCards.length > 0) {
-        let currentIndex = 0;
-
-        function updateShopCarousel() {
-            const cardWidth = shopCards[0].offsetWidth;
-            // Add gap to width calculation
-            const gap = 20; // Matches CSS gap
-            const moveAmount = (cardWidth + gap) * currentIndex;
-            shopTrack.style.transform = `translateX(-${moveAmount}px)`;
-        }
-
-        if (shopNextBtn) {
-            shopNextBtn.addEventListener('click', () => {
-                // Calculate how many items are visible
-                const containerWidth = document.querySelector('.shop-carousel-container').offsetWidth;
-                const cardWidth = shopCards[0].offsetWidth + 20; // width + gap
-                const visibleItems = Math.floor(containerWidth / cardWidth);
-
-                // Prevent scrolling past the last item
-                // Max index such that the last item is visible
-                /* 
-                   Logic:
-                   If we have 5 items, and 3 are visible.
-                   Indices: 0, 1, 2, 3, 4
-                   We want to show items 2, 3, 4 at the end.
-                   So track should be translated by width of 0 and 1.
-                   Max Index should be Total - Visible.
-                   If Total(5) - Visible(3) = 2.
-                   TranslateX(- (card + gap) * 2) shows cards 2, 3, 4.
-               */
-
-                const maxIndex = Math.max(0, shopCards.length - visibleItems);
-
-                // But user might want simple item-by-item loop
-                // Let's implement simple infinite loop logic for better UX
-                if (currentIndex >= maxIndex) {
-                    currentIndex = 0;
-                } else {
-                    currentIndex++;
-                }
-                updateShopCarousel();
-            });
-        }
-
-        if (shopPrevBtn) {
-            shopPrevBtn.addEventListener('click', () => {
-                const containerWidth = document.querySelector('.shop-carousel-container').offsetWidth;
-                const cardWidth = shopCards[0].offsetWidth + 20;
-                const visibleItems = Math.floor(containerWidth / cardWidth);
-                const maxIndex = Math.max(0, shopCards.length - visibleItems);
-
-                if (currentIndex <= 0) {
-                    currentIndex = maxIndex;
-                } else {
-                    currentIndex--;
-                }
-                updateShopCarousel();
-            });
-        }
-
-        // Resize handler
-        window.addEventListener('resize', updateShopCarousel);
-
-        // Touch Swipe Support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        shopTrack.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        shopTrack.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 50; // Minimum distance to be considered a swipe
-            if (touchEndX < touchStartX - swipeThreshold) {
-                // Swiped Left -> Next
-                if (shopNextBtn) shopNextBtn.click();
-            }
-            if (touchEndX > touchStartX + swipeThreshold) {
-                // Swiped Right -> Prev
-                if (shopPrevBtn) shopPrevBtn.click();
-            }
-        }
-    }
-
-    // Shop Table Toggle Logic
-    const toggleTableBtn = document.getElementById('toggle-shop-table');
+    const toggleTableButton = document.getElementById('toggle-shop-table');
     const tableWrapper = document.getElementById('shop-table-wrapper');
-
-    if (toggleTableBtn && tableWrapper) {
-        toggleTableBtn.addEventListener('click', () => {
+    if (toggleTableButton && tableWrapper) {
+        const updateTable = () => {
+            const collapsed = tableWrapper.classList.contains('collapsed');
+            toggleTableButton.setAttribute('aria-expanded', String(!collapsed));
+            tableWrapper.inert = collapsed;
+            tableWrapper.setAttribute('aria-hidden', String(collapsed));
+            toggleTableButton.innerHTML = collapsed
+                ? '<i class="fas fa-tshirt" aria-hidden="true"></i> Ver Tabla de Equipación'
+                : '<i class="fas fa-chevron-up" aria-hidden="true"></i> Ocultar Tabla';
+        };
+        toggleTableButton.addEventListener('click', () => {
             tableWrapper.classList.toggle('collapsed');
-            const isCollapsed = tableWrapper.classList.contains('collapsed');
-            toggleTableBtn.setAttribute('aria-expanded', String(!isCollapsed));
+            updateTable();
+        });
+        updateTable();
+    }
 
-            // Update button text
-            if (isCollapsed) {
-                toggleTableBtn.innerHTML = '<i class="fas fa-tshirt"></i> Ver Tabla de Equipación';
-            } else {
-                toggleTableBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Ocultar Tabla';
+    // Clipboard fallback keeps copying usable on local, non-secure previews.
+    const copyText = async text => {
+        if (navigator.clipboard?.writeText) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch {
+                // Older browsers and denied clipboard permissions can use selection.
             }
+        }
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0;';
+        const previouslyFocused = document.activeElement;
+        document.body.appendChild(field);
+        field.select();
+        let copied = false;
+        try {
+            copied = typeof document.execCommand === 'function' && document.execCommand('copy');
+        } catch {
+            copied = false;
+        } finally {
+            field.remove();
+            previouslyFocused?.focus({ preventScroll: true });
+        }
+        return copied;
+    };
+
+    const setupCopyButton = (buttonId, emailId) => {
+        const button = document.getElementById(buttonId);
+        const email = document.getElementById(emailId);
+        if (!button || !email) return;
+        const icon = button.querySelector('i');
+        const originalIcon = icon?.className;
+        const originalLabel = button.getAttribute('aria-label') || 'Copiar email';
+        const originalTitle = button.getAttribute('title');
+        let feedbackTimeout;
+        let copying = false;
+
+        button.addEventListener('click', async () => {
+            if (copying) return;
+            copying = true;
+            const copied = await copyText(email.textContent.trim());
+            copying = false;
+            window.clearTimeout(feedbackTimeout);
+
+            if (copied) {
+                if (icon) icon.className = 'fas fa-check';
+                button.setAttribute('aria-label', 'Email copiado');
+                button.setAttribute('title', 'Email copiado');
+            } else {
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(email);
+                selection?.removeAllRanges();
+                selection?.addRange(range);
+                button.setAttribute('aria-label', 'Email seleccionado para copiar');
+                button.setAttribute('title', 'Email seleccionado para copiar');
+            }
+
+            feedbackTimeout = window.setTimeout(() => {
+                if (icon) icon.className = originalIcon;
+                button.setAttribute('aria-label', originalLabel);
+                if (originalTitle === null) button.removeAttribute('title');
+                else button.setAttribute('title', originalTitle);
+            }, 2500);
         });
-    }
+    };
 
-    // Shop Email Copy Functionality
-    const shopCopyEmailBtn = document.getElementById('shop-copy-email-btn');
-    const shopContactEmail = document.getElementById('shop-contact-email');
-
-    if (shopCopyEmailBtn && shopContactEmail) {
-        shopCopyEmailBtn.addEventListener('click', () => {
-            const emailText = shopContactEmail.innerText;
-
-            navigator.clipboard.writeText(emailText).then(() => {
-                const icon = shopCopyEmailBtn.querySelector('i');
-                const originalClass = icon.className;
-
-                icon.className = 'fas fa-check';
-                icon.style.color = 'var(--primary-red)';
-
-                setTimeout(() => {
-                    icon.className = originalClass;
-                    icon.style.color = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        });
-    }
+    setupCopyButton('copy-email-btn', 'contact-email');
+    setupCopyButton('shop-copy-email-btn', 'shop-contact-email');
 
     // Competition calendar: upcoming dates first, then completed and undated events.
     const competitionTable = document.querySelector('#competition-list');

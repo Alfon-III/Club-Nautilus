@@ -32,11 +32,11 @@
 	<header>
 		<div class="container">
 			<nav aria-label="Navegación principal">
-				<a href="#" class="logo">
+				<a href="#hero" class="logo">
 					<img src="images/nautilicon.png" alt="Logo Nautilus">
-					CLUB NAUTILUS
+					<span>CLUB NAUTILUS</span>
 				</a>
-				<ul class="nav-links">
+				<ul class="nav-links" id="primary-navigation">
 					<li><a href="#hero">Inicio</a></li>
 					<li><a href="#about">Nosotros</a></li>
 					<li><a href="#instagram">Instagram</a></li>
@@ -45,7 +45,7 @@
 					<li><a href="#location">Ubicación</a></li>
 					<li><a href="#contact">Contacto</a></li>
 				</ul>
-				<button class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false">
+				<button class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-navigation">
 					<span class="bar"></span>
 					<span class="bar"></span>
 					<span class="bar"></span>
@@ -54,47 +54,49 @@
 		</div>
 	</header>
 
+	<main>
 	<!-- Hero Section -->
 	<section id="hero" class="hero">
 		<div class="container">
-			<div class="hero-content fade-in-up">
-				<h1>Club Nautilus</h1>
+			<div class="hero-content">
+				<h1>Club <span>Nautilus</span></h1>
 				<h2>Salvamento Deportivo</h2>
 				<p>Deporte educativo que salva vidas. Únete al Club Nautilus y descubre el salvamento y socorrismo
 					deportivo.</p>
-				<a href="#about" class="btn btn-primary">Conócenos</a>
+				<a href="#about" class="btn btn-primary">Conócenos <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 			</div>
+			<img class="hero-image" src="images/salida.webp" alt="Salida Competición" width="1438" height="1440" fetchpriority="high">
 		</div>
 	</section>
 
 	<!-- About Section -->
 	<section id="about" class="section-padding about">
-		<div class="container">
-			<h2 class="section-title fade-in-up">¿Quiénes Somos?</h2>
-			<div class="about-grid">
-				<div class="about-text fade-in-up">
-					<p>🌊 <b>Salvamento y Socorrismo</b>: Nuestra actividad principal es este <i>deporte educativo</i>
-						que salva vidas. Enseñamos técnicas reales de rescate profesional mediante la práctica
-						deportiva.</p>
-					<br>
-					<p>🏊 <b>Para todos</b>: Realizamos la actividad tanto en <b>instalaciones acuáticas</b> como en
-						<b>aguas abiertas</b>. Enfocado a todas las edades: desde los más pequeños, pasando por junior y
-						absoluto, hasta llegar a máster.
-					</p>
-					<br>
-					<p>🤝 <b>Valores</b>: Fomentamos el respeto, el <i>afán de superación</i>, el compañerismo, el
-						trabajo en equipo y el compromiso.</p>
-					<br>
-					<p>🏆 <b>Competición y Experiencia</b>: Ofrecemos práctica federada para competir a nivel autonómico
-						y estatal. ¡<b>Más de 10 años</b> de experiencia a nuestras espaldas!</p>
-					<br>
-					<p>✨ <b>Actividad Completa</b>: Una alternativa extraescolar muy recomendable. Es un deporte
-						<i>motivador, diverso y completo</i> que aporta gran enriquecimiento cultural y deportivo.
-					</p>
+		<div class="container about-grid">
+			<div class="about-identity">
+				<h2 class="section-title">¿Quiénes Somos?</h2>
+				<img src="images/nautilus-blanco.png" alt="Logo Club Nautilus Grande" width="1280" height="720" loading="lazy">
+			</div>
+			<div class="about-text">
+				<div class="about-item">
+					<h3>Salvamento y Socorrismo</h3>
+					<p>Nuestra actividad principal es este <em>deporte educativo</em> que salva vidas. Enseñamos técnicas reales de rescate profesional mediante la práctica deportiva.</p>
 				</div>
-
-				<img src="images/nautilus-blanco.png" alt="Logo Club Nautilus Grande">
-
+				<div class="about-item">
+					<h3>Para todos</h3>
+					<p>Realizamos la actividad tanto en <strong>instalaciones acuáticas</strong> como en <strong>aguas abiertas</strong>. Enfocado a todas las edades: desde los más pequeños, pasando por junior y absoluto, hasta llegar a máster.</p>
+				</div>
+				<div class="about-item">
+					<h3>Valores</h3>
+					<p>Fomentamos el respeto, el afán de superación, el compañerismo, el trabajo en equipo y el compromiso.</p>
+				</div>
+				<div class="about-item">
+					<h3>Competición y Experiencia</h3>
+					<p>Ofrecemos práctica federada para competir a nivel autonómico y estatal. ¡<strong>Más de 10 años</strong> de experiencia a nuestras espaldas!</p>
+				</div>
+				<div class="about-item">
+					<h3>Actividad Completa</h3>
+					<p>Una alternativa extraescolar muy recomendable. Es un deporte motivador, diverso y completo que aporta gran enriquecimiento cultural y deportivo.</p>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -102,138 +104,134 @@
 	<!-- Club Sections -->
 	<section id="explore" class="section-padding explore-sections">
 		<div class="container">
-			<div class="section-intro fade-in-up">
-				<span class="section-kicker"><i class="fas fa-compass"></i> Explora Nautilus</span>
+			<div class="section-intro">
 				<h2 class="section-title">Todo el club, a un salto</h2>
+				<p class="section-note">Explora Nautilus</p>
 				<p>Consulta el calendario de competiciones y la actividad actual del equipo.</p>
 			</div>
 			<div class="section-links-grid">
-				<a class="section-link-card fade-in-up" href="secciones/competiciones.html"><span class="section-link-icon"><i class="fas fa-flag-checkered"></i></span><span><strong>Competiciones</strong><small>Disciplinas y pruebas</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
-				<a class="section-link-card fade-in-up" href="#location"><span class="section-link-icon"><i class="fas fa-clock"></i></span><span><strong>Horarios</strong><small>Entrenamientos por grupo</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
-				<a class="section-link-card fade-in-up" href="#shop"><span class="section-link-icon"><i class="fas fa-shirt"></i></span><span><strong>Material</strong><small>Equipación del club</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
-				<a class="section-link-card fade-in-up" href="#location"><span class="section-link-icon"><i class="fas fa-location-dot"></i></span><span><strong>Ubicación</strong><small>Piscina y puntos de entrenamiento</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
-				<a class="section-link-card fade-in-up" href="#contact"><span class="section-link-icon"><i class="fas fa-envelope"></i></span><span><strong>Contacto</strong><small>Habla con el club</small></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card" href="secciones/competiciones.html"><span class="section-link-icon"><i class="fas fa-flag-checkered"></i></span><span><strong>Competiciones</strong><span class="section-link-description">Disciplinas y pruebas</span></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card" href="#location"><span class="section-link-icon"><i class="fas fa-clock"></i></span><span><strong>Horarios</strong><span class="section-link-description">Entrenamientos por grupo</span></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card" href="#shop"><span class="section-link-icon"><i class="fas fa-shirt"></i></span><span><strong>Material</strong><span class="section-link-description">Equipación del club</span></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card" href="#location"><span class="section-link-icon"><i class="fas fa-location-dot"></i></span><span><strong>Ubicación</strong><span class="section-link-description">Piscina y puntos de entrenamiento</span></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
+				<a class="section-link-card" href="#contact"><span class="section-link-icon"><i class="fas fa-envelope"></i></span><span><strong>Contacto</strong><span class="section-link-description">Habla con el club</span></span><i class="fas fa-arrow-right section-link-arrow"></i></a>
 			</div>
 		</div>
 	</section>
 
 	<section id="instagram" class="section-padding instagram">
-		<h2 class="section-title fade-in-up">Instagram</h2>
 		<div class="container">
+			<div class="section-heading">
+				<h2 class="section-title">Instagram</h2>
+				<a href="https://www.instagram.com/nautilus_sos/" target="_blank" rel="noopener noreferrer" class="text-link"><i class="fab fa-instagram" aria-hidden="true"></i> Síguenos en Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+			</div>
 			<!-- Instagram Carousel -->
-			<div class="carousel-container fade-in-up">
-				<div class="carousel-slide">
+			<div class="carousel-container">
+				<div class="carousel-slide" tabindex="0" role="region" aria-label="Publicaciones de Instagram">
 
 
 					<div class="carousel-item">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DLRzMQzNGmw/?utm_source=ig_embed&amp;utm_campaign=loading"
-							data-instgrm-version="14"
-							style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+							data-instgrm-version="14">
+							<a class="instagram-fallback" href="https://www.instagram.com/p/DLRzMQzNGmw/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 						</blockquote>
 					</div>
 
 					<div class="carousel-item">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DLruKD4NWeA/?utm_source=ig_embed&amp;utm_campaign=loading"
-							data-instgrm-version="14"
-							style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+							data-instgrm-version="14">
+							<a class="instagram-fallback" href="https://www.instagram.com/p/DLruKD4NWeA/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 						</blockquote>
 					</div>
 
 					<div class="carousel-item">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DFlVJ6yt1JX/?utm_source=ig_embed&amp;utm_campaign=loading"
-							data-instgrm-version="14"
-							style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+							data-instgrm-version="14">
+							<a class="instagram-fallback" href="https://www.instagram.com/p/DFlVJ6yt1JX/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 						</blockquote>
 					</div>
 
 					<div class="carousel-item">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DES9XJXtNdu/?utm_source=ig_embed&amp;utm_campaign=loading"
-							data-instgrm-version="14"
-							style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+							data-instgrm-version="14">
+							<a class="instagram-fallback" href="https://www.instagram.com/p/DES9XJXtNdu/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 						</blockquote>
 					</div>
 
 					<div class="carousel-item">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DJFTt2ZtMeg/?utm_source=ig_embed&amp;utm_campaign=loading"
-							data-instgrm-version="14"
-							style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+							data-instgrm-version="14">
+							<a class="instagram-fallback" href="https://www.instagram.com/p/DJFTt2ZtMeg/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 						</blockquote>
 					</div>
 
-					<div style="margin-bottom: 40px; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow);"
-						class="fade-in-up">
-						<img src="images/salida.png" alt="Salida Competición" style="width: 100%; height: auto;">
-					</div>
 
 				</div>
 
 				<!-- Navigation Buttons -->
+				<div class="carousel-controls">
 				<button class="carousel-btn prev-btn" type="button" aria-label="Publicación anterior">
 					<i class="fas fa-chevron-left"></i>
 				</button>
 				<button class="carousel-btn next-btn" type="button" aria-label="Publicación siguiente">
 					<i class="fas fa-chevron-right"></i>
 				</button>
+				</div>
 			</div>
 
 			<!-- Instagram Embed Script -->
-			<script async src="//www.instagram.com/embed.js"></script>
-		</div>
-		<div style="text-align: center; margin-top: 40px;">
-			<a href="https://www.instagram.com/nautilus_sos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-				<i class="fab fa-instagram"></i> Síguenos en Instagram
-			</a>
+			<script async src="https://www.instagram.com/embed.js"></script>
 		</div>
 	</section>
 
 	<!-- Shop Section -->
 	<section id="shop" class="section-padding shop">
 		<div class="container">
-			<h2 class="section-title fade-in-up">Equipación</h2>
+			<h2 class="section-title">Equipación</h2>
 
 			<!-- Collapsible Table -->
-			<div class="shop-table-container fade-in-up">
+			<div class="shop-table-container">
 				<button id="toggle-shop-table" type="button" class="btn" aria-expanded="false" aria-controls="shop-table-wrapper">
 					<i class="fas fa-tshirt"></i> Ver Tabla de Equipación
 				</button>
-				<div id="shop-table-wrapper" class="collapsed">
+				<div id="shop-table-wrapper" class="collapsed" tabindex="0" role="region" aria-label="Tabla de Equipación">
 					<table class="shop-table">
 						<thead>
 							<tr>
-								<th>Equipación</th>
-								<th>Obligatoria</th>
-								<th>Uso</th>
+								<th scope="col">Equipación</th>
+								<th scope="col">Obligatoria</th>
+								<th scope="col">Uso</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Gorro Piscina</td>
-								<td><i class="fas fa-check"></i></td>
+								<td><i class="fas fa-check" role="img" aria-label="Sí"></i></td>
 								<td>Competiciones en piscina interior</td>
 							</tr>
 							<tr>
 								<td>Bañador Equipo</td>
-								<td><i class="fas fa-check"></i></td>
+								<td><i class="fas fa-check" role="img" aria-label="Sí"></i></td>
 								<td>Competiciones en piscina interior</td>
 							</tr>
 							<tr>
 								<td>Gorro Playa</td>
-								<td><i class="fas fa-check"></i></td>
+								<td><i class="fas fa-check" role="img" aria-label="Sí"></i></td>
 								<td>Competiciones aguas abiertas y banderas</td>
 							</tr>
 							<tr>
 								<td>Camiseta</td>
-								<td><i class="fas fa-check"></i></td>
+								<td><i class="fas fa-check" role="img" aria-label="Sí"></i></td>
 								<td>Competiciones y concentraciones</td>
 							</tr>
 							<tr>
 								<td>Sudadera</td>
-								<td><i class="fas fa-times"></i></td>
+								<td><i class="fas fa-times" role="img" aria-label="No"></i></td>
 								<td>Uso libre, recomendable para concentraciones</td>
 							</tr>
 						</tbody>
@@ -241,20 +239,26 @@
 				</div>
 			</div>
 
-			<h3 class="shop-subtitle fade-in-up">Galería de fotos</h3>
+			<div class="section-heading gallery-heading">
+				<h3 class="shop-subtitle">Galería de fotos</h3>
+				<div class="carousel-controls">
+					<button class="shop-nav-btn prev" type="button" aria-label="Equipación anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+					<button class="shop-nav-btn next" type="button" aria-label="Equipación siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+				</div>
+			</div>
 
-			<div class="shop-carousel-container fade-in-up">
-				<div class="shop-carousel-track">
+			<div class="shop-carousel-container">
+				<div class="shop-carousel-track" tabindex="0" role="region" aria-label="Galería de equipación">
 					<!-- Item 1: Camiseta -->
 					<div class="shop-carousel-card">
-						<img src="images/equipación/camiseta.jpeg" alt="Camiseta Oficial">
+						<img src="images/equipación/camiseta.jpeg" alt="Camiseta Oficial" loading="lazy">
 						<div class="shop-content">
 							<h4>Camiseta Oficial</h4>
 							<p>Camiseta técnica con los colores del club.</p>
 						</div>
 					</div>
 					<div class="shop-carousel-card">
-						<img src="images/equipación/gorro_piscina.jpeg" alt="Gorro piscina">
+						<img src="images/equipación/gorro_piscina.jpeg" alt="Gorro piscina" loading="lazy">
 						<div class="shop-content">
 							<h4>Gorro piscina</h4>
 							<p>Gorra de agua para competiciones en piscina interior.</p>
@@ -262,7 +266,7 @@
 					</div>
 					<!-- Item 2: Sudadera -->
 					<div class="shop-carousel-card">
-						<img src="images/equipación/sudadera.jpeg" alt="Sudadera Club">
+						<img src="images/equipación/sudadera.jpeg" alt="Sudadera Club" loading="lazy">
 						<div class="shop-content">
 							<h4>Sudadera Club</h4>
 							<p>Uso libre, recomendable para concentraciones, competiciones, entrenamientos.</p>
@@ -270,7 +274,7 @@
 					</div>
 					<!-- Item 4: Bañador Femenino -->
 					<div class="shop-carousel-card">
-						<img src="images/equipación/bañador_fem.jpeg" alt="Bañador Femenino">
+						<img src="images/equipación/bañador_fem.jpeg" alt="Bañador Femenino" loading="lazy">
 						<div class="shop-content">
 							<h4>Bañador Femenino</h4>
 							<p>Bañador de competición con ajuste perfecto.</p>
@@ -278,7 +282,7 @@
 					</div>
 					<!-- Item 3: Bañador Masculino -->
 					<div class="shop-carousel-card">
-						<img src="images/equipación/bañador_masc.jpeg" alt="Bañador Masculino">
+						<img src="images/equipación/bañador_masc.jpeg" alt="Bañador Masculino" loading="lazy">
 						<div class="shop-content">
 							<h4>Bañador Masculino</h4>
 							<p>Bañador de competición.</p>
@@ -286,7 +290,7 @@
 					</div>
 					<!-- Item 5: Gorro Playa -->
 					<div class="shop-carousel-card">
-						<img src="images/equipación/gorro_playa.jpeg" alt="Gorro Playa">
+						<img src="images/equipación/gorro_playa.jpeg" alt="Gorro Playa" loading="lazy">
 						<div class="shop-content">
 							<h4>Gorro Playa</h4>
 							<p>Gorro de competición para aguas abiertas y playa.</p>
@@ -294,17 +298,10 @@
 					</div>
 				</div>
 
-				<!-- Navigation Buttons -->
-				<button class="shop-nav-btn prev" type="button" aria-label="Equipación anterior">
-					<i class="fas fa-chevron-left"></i>
-				</button>
-				<button class="shop-nav-btn next" type="button" aria-label="Equipación siguiente">
-					<i class="fas fa-chevron-right"></i>
-				</button>
 			</div>
 
 			<!-- Shop Contact Info -->
-			<div class="shop-contact fade-in-up">
+			<div class="shop-contact">
 				<p>Para solicitar la equipación, envía un correo a la dirección:</p>
 				<div class="contact-info-display light-bg">
 					<span id="shop-contact-email">cdenautilus@gmail.com</span>
@@ -320,45 +317,45 @@
 <!-- Location Section -->
 	<section id="location" class="section-padding location">
 		<div class="container">
-			<h2 class="section-title fade-in-up">Ubicación y Horarios</h2>
+			<h2 class="section-title">Ubicación y Horarios</h2>
 
-			<div class="tabs-container fade-in-up">
-				<div class="tabs">
-					<button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="schedule-absolutos" data-group="schedule" data-target="schedule-absolutos">Ápex</button>
-					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="schedule-tecnificacion" data-group="schedule" data-target="schedule-tecnificacion">Tecnificación</button>
-					<button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="schedule-masters" data-group="schedule" data-target="schedule-masters">Másters</button>
+			<div class="tabs-container">
+				<div class="tabs" role="tablist" aria-label="Grupos de entrenamiento">
+					<button class="tab-btn active" type="button" role="tab" aria-selected="true" id="tab-schedule-absolutos" aria-controls="schedule-absolutos" data-group="schedule" data-target="schedule-absolutos">Ápex</button>
+					<button class="tab-btn" type="button" role="tab" aria-selected="false" id="tab-schedule-tecnificacion" aria-controls="schedule-tecnificacion" data-group="schedule" data-target="schedule-tecnificacion">Tecnificación</button>
+					<button class="tab-btn" type="button" role="tab" aria-selected="false" id="tab-schedule-masters" aria-controls="schedule-masters" data-group="schedule" data-target="schedule-masters">Másters</button>
 				</div>
 			</div>
 
 			<!-- ÁPEX -->
-			<div id="schedule-absolutos" class="table-container fade-in-up tab-content active" data-group="schedule">
-				<div class="schedule-description fade-in-up">
+			<div id="schedule-absolutos" role="tabpanel" aria-labelledby="tab-schedule-absolutos" tabindex="0" class="table-container tab-content active" data-group="schedule">
+				<div class="schedule-description">
 					<i class="fas fa-medal"></i>
 					<p>Para deportistas mayores de 14 años que quieran alcanzar su máximo nivel y asumir un alto grado de compromiso. 8 h semanales.</p>
 				</div>
 
 				<table>
-					<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th></tr></thead>
+					<thead><tr><th scope="col">L</th><th scope="col">M</th><th scope="col">X</th><th scope="col">J</th><th scope="col">V</th><th scope="col">S</th></tr></thead>
 					<tbody><tr><td>19:00-21:00</td><td>20:00-21:00</td><td>19:00-21:00</td><td>20:00-21:00</td><td>19:30-21:00</td><td>09:00-10:00</td></tr></tbody>
 				</table>
 			</div>
 
 			<!-- TECNIFICACIÓN -->
-			<div id="schedule-tecnificacion" class="table-container fade-in-up tab-content" data-group="schedule">
-				<div class="schedule-description fade-in-up">
+			<div id="schedule-tecnificacion" role="tabpanel" aria-labelledby="tab-schedule-tecnificacion" tabindex="0" class="table-container tab-content" data-group="schedule">
+				<div class="schedule-description">
 					<i class="fas fa-dumbbell"></i>
 					<p>Para deportistas entre 8 y 30 años que deseen mejorar sus cualidades como nadadores y socorristas. 5,5 h semanales.</p>
 				</div>
 
 				<table>
-					<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th></tr></thead>
+					<thead><tr><th scope="col">L</th><th scope="col">M</th><th scope="col">X</th><th scope="col">J</th><th scope="col">V</th><th scope="col">S</th></tr></thead>
 					<tbody><tr><td>19:30-21:00</td><td>—</td><td>19:30-21:00</td><td>—</td><td>19:30-21:00</td><td>09:00-10:00</td></tr></tbody>
 				</table>
 			</div>
 
 			<!-- MÁSTERS -->
-			<div id="schedule-masters" class="table-container fade-in-up tab-content" data-group="schedule">
-				<div class="schedule-description fade-in-up">
+			<div id="schedule-masters" role="tabpanel" aria-labelledby="tab-schedule-masters" tabindex="0" class="table-container tab-content" data-group="schedule">
+				<div class="schedule-description">
 					<i class="fas fa-swimmer"></i>
 					<p>Grupo dirigido a nadadores adultos que desean mantenerse en forma y seguir disfrutando del entrenamiento en un ambiente competitivo y social.</p>
 				</div>
@@ -366,12 +363,12 @@
 				<table>
 					<thead>
 						<tr>
-							<th>L</th>
-							<th>M</th>
-							<th>X</th>
-							<th>J</th>
-							<th>V</th>
-							<th>S</th>
+							<th scope="col">L</th>
+							<th scope="col">M</th>
+							<th scope="col">X</th>
+							<th scope="col">J</th>
+							<th scope="col">V</th>
+							<th scope="col">S</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -388,14 +385,14 @@
 			</div>
 
 			<div class="schedule-grid">
-				<div class="schedule-item fade-in-up">
+				<div class="schedule-item">
 					<i class="fas fa-map-marker-alt"></i>
-					<h3>Centro Deportivo</h3>
-					<h2>Jose Maria Cagigal</h2>
+					<p>Centro Deportivo</p>
+					<h3>Jose Maria Cagigal</h3>
 				</div>
 			</div>
 
-			<div class="map-container fade-in-up">
+			<div class="map-container">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.9405782815275!2d-3.738677684369474!3d40.43231466261498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228188c1d8917%3A0x243d095b52a81126!2sMunicipal%20Polideportivo%20Jose%20Maria%20Cagigal!5e0!3m2!1sen!2ses!4v1670090582843!5m2!1sen!2ses"
 					width="100%" height="100%" title="Ubicación del Centro Deportivo Jose Maria Cagigal" style="border:0;" allowfullscreen="" loading="lazy"
@@ -406,10 +403,10 @@
 	</section>
 
 
-	<section id="contact">
-		<footer>
+	</main>
+		<footer id="contact">
 			<div class="container">
-				<div class="contact-cta fade-in-up">
+				<div class="contact-cta">
 					<h3>¿Quieres más información?</h3>
 					<p>No dudes en escribirnos, estaremos encantados de atenderte.</p>
 					<div class="contact-info-display">
@@ -431,11 +428,11 @@
 
 				<div class="sponsors">
 					<!-- <img src="images/cmdmadrid.png" alt="Ayuntamiento Madrid"> -->
-					<img src="images/fede.png" alt="Federación">
-					<img src="images/real.png" alt="Real Federación">
-					<img src="images/madrid.png" alt="Comunidad Madrid">
-					<img src="images/distrito jmc.png" alt="Distrito">
-					<img src="images/madriddeporte.png" alt="Madrid Deporte">
+					<img src="images/fede.png" alt="Federación" loading="lazy">
+					<img src="images/real.png" alt="Real Federación" loading="lazy">
+					<img src="images/madrid.png" alt="Comunidad Madrid" loading="lazy">
+					<img src="images/distrito jmc.png" alt="Distrito" loading="lazy">
+					<img src="images/madriddeporte.png" alt="Madrid Deporte" loading="lazy">
 				</div>
 
 				<div class="copyright">
@@ -443,12 +440,6 @@
 				</div>
 			</div>
 		</footer>
-	</section>
-
-	<!-- Skip Section Button -->
-	<button id="skip-section-btn" type="button" aria-label="Siguiente sección">
-		<i class="fas fa-chevron-down"></i>
-	</button>
 
 	<!-- Scripts -->
 	<script src="script.js"></script>

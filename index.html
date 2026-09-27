@@ -57,6 +57,7 @@
 	<main>
 	<!-- Hero Section -->
 	<section id="hero" class="hero">
+		<img class="hero-image" src="images/hero_nau_slides.gif" alt="Actividad deportiva del Club Nautilus" width="1152" height="648" fetchpriority="high">
 		<div class="container">
 			<div class="hero-content">
 				<h1>Club <span>Nautilus</span></h1>
@@ -65,7 +66,6 @@
 					deportivo.</p>
 				<a href="#about" class="btn btn-primary">Conócenos <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 			</div>
-			<img class="hero-image" src="images/salida.webp" alt="Salida Competición" width="1438" height="1440" fetchpriority="high">
 		</div>
 	</section>
 
@@ -127,10 +127,11 @@
 			</div>
 			<!-- Instagram Carousel -->
 			<div class="carousel-container">
+				<div class="carousel-viewport">
 				<div class="carousel-slide" tabindex="0" role="region" aria-label="Publicaciones de Instagram">
 
 
-					<div class="carousel-item">
+					<div class="carousel-item is-active">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DLRzMQzNGmw/?utm_source=ig_embed&amp;utm_campaign=loading"
 							data-instgrm-version="14">
@@ -138,7 +139,7 @@
 						</blockquote>
 					</div>
 
-					<div class="carousel-item">
+					<div class="carousel-item is-next">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DLruKD4NWeA/?utm_source=ig_embed&amp;utm_campaign=loading"
 							data-instgrm-version="14">
@@ -154,7 +155,7 @@
 						</blockquote>
 					</div>
 
-					<div class="carousel-item">
+					<div class="carousel-item is-before-previous">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DES9XJXtNdu/?utm_source=ig_embed&amp;utm_campaign=loading"
 							data-instgrm-version="14">
@@ -162,7 +163,7 @@
 						</blockquote>
 					</div>
 
-					<div class="carousel-item">
+					<div class="carousel-item is-previous">
 						<blockquote class="instagram-media" data-instgrm-captioned
 							data-instgrm-permalink="https://www.instagram.com/p/DJFTt2ZtMeg/?utm_source=ig_embed&amp;utm_campaign=loading"
 							data-instgrm-version="14">
@@ -172,15 +173,23 @@
 
 
 				</div>
+				<button class="carousel-preview-button carousel-preview-previous" type="button" aria-label="Ver la publicación anterior"></button>
+				<button class="carousel-preview-button carousel-preview-next" type="button" aria-label="Ver la publicación siguiente"></button>
 
 				<!-- Navigation Buttons -->
 				<div class="carousel-controls">
-				<button class="carousel-btn prev-btn" type="button" aria-label="Publicación anterior">
-					<i class="fas fa-chevron-left"></i>
-				</button>
-				<button class="carousel-btn next-btn" type="button" aria-label="Publicación siguiente">
-					<i class="fas fa-chevron-right"></i>
-				</button>
+					<button class="carousel-btn prev-btn" type="button" aria-label="Publicación anterior">
+						<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+					</button>
+					<button class="carousel-btn next-btn" type="button" aria-label="Publicación siguiente">
+						<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+					</button>
+				</div>
+				</div>
+				<div class="carousel-footer">
+					<div class="carousel-pagination" role="group" aria-label="Elegir publicación"></div>
+					<p id="instagram-carousel-status" class="carousel-status" role="status" aria-atomic="true">Publicación 1 de 5</p>
+					<a class="carousel-post-link" href="https://www.instagram.com/p/DLRzMQzNGmw/" target="_blank" rel="noopener noreferrer">Abrir en Instagram <span aria-hidden="true">↗</span></a>
 				</div>
 			</div>
 

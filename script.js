@@ -135,6 +135,163 @@ document.addEventListener('DOMContentLoaded', () => {
         activateTab(Math.max(0, initial));
     });
 
+    const setupInstagramCarousel = () => {
+        const track = document.querySelector('.carousel-slide');
+        if (!track) return;
+        const items = [...track.querySelectorAll('.carousel-item')];
+        if (items.length < 2) return;
+        const carousel = track.closest('.carousel-container');
+        const viewport = carousel.querySelector('.carousel-viewport');
+        const previous = document.querySelector('.prev-btn');
+        const next = document.querySelector('.next-btn');
+        const previousPreview = document.querySelector('.carousel-preview-previous');
+        const nextPreview = document.querySelector('.carousel-preview-next');
+        const status = document.querySelector('#instagram-carousel-status');
+        const pagination = carousel.querySelector('.carousel-pagination');
+        const postLink = carousel.querySelector('.carousel-post-link');
+        const links = items.map(item => item.querySelector('[data-instgrm-permalink]')?.dataset.instgrmPermalink
+            || item.querySelector('iframe')?.src?.replace(/\/embed\/?(?:\?.*)?$/, '/'));
+        const leading = Math.min(2, items.length - 1);
+        const restingOffset = 10 - leading * 80;
+        let active = 0;
+        let target = 0;
+        let moving = false;
+
+        track.id ||= 'instagram-posts';
+        track.removeAttribute('tabindex');
+        track.removeAttribute('role');
+        track.removeAttribute('aria-label');
+        track.style.transform = `translateX(${restingOffset}%)`;
+        viewport.tabIndex = 0;
+        viewport.setAttribute('role', 'region');
+        viewport.setAttribute('aria-roledescription', 'carrusel');
+        viewport.setAttribute('aria-label', 'Publicaciones de Instagram');
+        if (status?.id) viewport.setAttribute('aria-describedby', status.id);
+        [previous, next, previousPreview, nextPreview].forEach(button => {
+            button?.setAttribute('aria-controls', track.id);
+        });
+
+        const pages = items.map((item, index) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'carousel-page';
+            button.textContent = String(index + 1);
+            button.setAttribute('aria-label', `Ver publicación ${index + 1} de ${items.length}`);
+            button.setAttribute('aria-controls', track.id);
+            button.addEventListener('click', () => navigate(index));
+            pagination.appendChild(button);
+            item.setAttribute('role', 'group');
+            item.setAttribute('aria-label', `Publicación ${index + 1} de ${items.length}`);
+            return button;
+        });
+
+        const updateHeight = () => {
+            viewport.style.height = `${Math.ceil(items[active].getBoundingClientRect().height)}px`;
+        };
+
+        const render = () => {
+            const previousIndex = (active - 1 + items.length) % items.length;
+            const nextIndex = (active + 1) % items.length;
+
+            items.forEach((item, index) => {
+                item.classList.toggle('is-previous', index === previousIndex);
+                item.classList.toggle('is-active', index === active);
+                item.classList.toggle('is-next', index === nextIndex);
+                item.classList.remove('is-before-previous');
+                item.inert = index !== active;
+                item.setAttribute('aria-hidden', String(index !== active));
+
+                item.style.order = String((index - active + leading + items.length) % items.length);
+                if (index === active) pages[index].setAttribute('aria-current', 'true');
+                else pages[index].removeAttribute('aria-current');
+            });
+
+            if (status) status.textContent = `Publicación ${active + 1} de ${items.length}`;
+            if (links[active]) postLink.href = links[active];
+            updateHeight();
+        };
+
+        const advance = () => {
+            if (moving || active === target) return;
+            moving = true;
+            const distance = (target - active + items.length) % items.length;
+            const direction = distance <= items.length / 2 ? 1 : -1;
+            if (items[active].contains(document.activeElement)) viewport.focus({ preventScroll: true });
+            active = (active + direction + items.length) % items.length;
+            render();
+            const finish = () => {
+                moving = false;
+                advance();
+            };
+            if (reducedMotion.matches || !track.animate) {
+                finish();
+                return;
+            }
+            const animation = track.animate([
+                { transform: `translateX(${restingOffset + direction * 80}%)` },
+                { transform: `translateX(${restingOffset}%)` }
+            ], { duration: 260, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
+            animation.finished.then(finish, finish);
+        };
+
+        const navigate = index => {
+            target = (index + items.length) % items.length;
+            advance();
+        };
+        const move = direction => navigate(target + direction);
+
+        previous?.addEventListener('click', () => move(-1));
+        next?.addEventListener('click', () => move(1));
+        previousPreview?.addEventListener('click', () => move(-1));
+        nextPreview?.addEventListener('click', () => move(1));
+        carousel.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                move(-1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                move(1);
+            } else if (event.key === 'Home' || event.key === 'End') {
+                event.preventDefault();
+                navigate(event.key === 'Home' ? 0 : items.length - 1);
+            }
+        });
+
+        // Embedded posts handle their own gestures; the surrounding preview areas support swipes.
+        let gesture = null;
+        let swiped = false;
+        viewport.addEventListener('pointerdown', event => {
+            swiped = false;
+            if (event.pointerType === 'mouse') return;
+            gesture = { id: event.pointerId, x: event.clientX, y: event.clientY };
+        });
+        viewport.addEventListener('pointerup', event => {
+            if (!gesture || gesture.id !== event.pointerId) return;
+            const dx = event.clientX - gesture.x;
+            const dy = event.clientY - gesture.y;
+            gesture = null;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                swiped = true;
+                move(dx < 0 ? 1 : -1);
+            }
+        });
+        viewport.addEventListener('pointercancel', () => { gesture = null; });
+        viewport.addEventListener('click', event => {
+            if (!swiped) return;
+            event.preventDefault();
+            event.stopPropagation();
+            swiped = false;
+        }, true);
+        if ('ResizeObserver' in window) {
+            const observer = new ResizeObserver(updateHeight);
+            items.forEach(item => observer.observe(item));
+        }
+        window.addEventListener('resize', updateHeight, { passive: true });
+        render();
+    };
+
+    setupInstagramCarousel();
+
     // Native scrolling supports touch, trackpads and the visible arrow controls.
     const setupCarousel = ({ trackSelector, itemSelector, previousSelector, nextSelector, id, label }) => {
         const track = document.querySelector(trackSelector);
@@ -184,15 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateControls();
     };
-
-    setupCarousel({
-        trackSelector: '.carousel-slide',
-        itemSelector: '.carousel-item',
-        previousSelector: '.prev-btn',
-        nextSelector: '.next-btn',
-        id: 'instagram-posts',
-        label: 'Instagram'
-    });
 
     setupCarousel({
         trackSelector: '.shop-carousel-track',

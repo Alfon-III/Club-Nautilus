@@ -493,6 +493,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (row.dataset.provisional === 'true') {
                 group = 0;
                 countdownCell.textContent = 'Fecha provisional';
+            } else if (row.dataset.alternative === 'true') {
+                group = 0;
+                countdownCell.textContent = todayDay >= start
+                    ? 'Día por concretar'
+                    : `${Math.round((start - todayDay) / 86400000)}–${Math.round((end - todayDay) / 86400000)} días · día por concretar`;
             } else {
                 group = 0;
                 countdownCell.textContent = todayDay >= start

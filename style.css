@@ -937,13 +937,13 @@ tbody tr:hover {
 
 #location table {
     table-layout: fixed;
-    min-width: 600px;
+    min-width: 0;
 }
 
 #location th {
     padding-top: 0;
     color: var(--lightest-slate);
-    font-size: 0.875rem;
+    font-size: 1rem;
     text-align: center;
     border-bottom: 2px solid var(--primary-red);
 }
@@ -965,28 +965,67 @@ tbody tr:hover {
 
 #location .session-time {
     color: var(--white);
-}
-
-#location .time-line {
-    display: block;
-    color: var(--white);
-    font-size: 0.9375rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    line-height: 1.4;
-}
-
-#location .time-line + .time-line {
-    color: var(--lightest-slate);
-    font-weight: 500;
 }
 
 #location .no-session {
-    color: var(--light-slate);
+    color: var(--lightest-slate);
+    font-size: 0.875rem;
 }
 
 #location td {
     color: var(--white);
     white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+    #location table,
+    #location tbody,
+    #location tbody tr {
+        display: block;
+        width: 100%;
+    }
+
+    #location thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    #location td {
+        position: relative;
+        display: block;
+        min-height: 56px;
+        padding: 16px 0 16px 42%;
+        border-left: 0;
+        text-align: right;
+        line-height: 24px;
+    }
+
+    #location td:first-child {
+        border-top: 1px solid var(--section-line);
+    }
+
+    #location td + td {
+        border-left: 0;
+    }
+
+    #location td::before {
+        content: attr(data-day);
+        position: absolute;
+        left: 0;
+        color: var(--white);
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    #location tbody tr:hover {
+        background: transparent;
+    }
 }
 
 .shop-table {
